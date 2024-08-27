@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 public class LotDTO {
     private int lotID;
     private String location;
-    private int noofSlots;
+    private int noOfSlots;
 }

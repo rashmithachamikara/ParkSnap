@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
     public int userID;
     public String name;
-    public String phoneno;
+    public String phoneNo;
     public String username;
     public String password;
 }
