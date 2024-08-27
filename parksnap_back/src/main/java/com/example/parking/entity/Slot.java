@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 public class Slot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int slotID;
+    public int slotId;
     public String type;
 
     @ManyToOne

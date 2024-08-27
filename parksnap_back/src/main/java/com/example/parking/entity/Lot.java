@@ -16,9 +16,9 @@ import java.util.List;
 public class Lot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int lotID;
+    private int lotId;
     private String location;
-    private int noofSlots;
+    private int noOfSlots;
 
     @OneToMany(mappedBy = "lot", cascade = CascadeType.ALL)
     private List<Slot> slots;

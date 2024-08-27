@@ -15,9 +15,9 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int userID;
+    public int userId;
     public String name;
-    public String phoneno;
+    public String phoneNo;
     public String username;
     public String password;
 
