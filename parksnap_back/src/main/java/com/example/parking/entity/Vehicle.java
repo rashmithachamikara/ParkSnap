@@ -13,7 +13,9 @@ import lombok.NoArgsConstructor;
 public class Vehicle {
     @Id
     private int vehicleID;
+
     private String licensePlate;
+
     private String type;
 
     @ManyToOne
