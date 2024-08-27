@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "Vehicle")
 public class Vehicle {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vehicleID;
 
     private String licensePlate;

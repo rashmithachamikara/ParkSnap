@@ -15,22 +15,22 @@ public class Reservation {
     @EmbeddedId
     private ReservationId id;
 
-    private Integer duration;
-
-    private LocalDateTime startTime;
-
-    @ManyToOne
     @MapsId("slotId")
+    @ManyToOne
     @JoinColumn(name = "slot_id", nullable = false)
     private Slot slot;
 
-    @ManyToOne
     @MapsId("userId")
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
     @MapsId("vehicleId")
+    @ManyToOne
     @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle;
+
+    private Integer duration;
+
+    private LocalDateTime startTime;
 }
