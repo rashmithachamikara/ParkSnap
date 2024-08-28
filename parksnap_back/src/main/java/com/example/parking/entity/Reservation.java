@@ -15,19 +15,16 @@ public class Reservation {
     @EmbeddedId
     private ReservationId id;
 
-    @MapsId("slotId")
     @ManyToOne
-    @JoinColumn(name = "slot_id", nullable = false)
+    @JoinColumn(name = "slotId", insertable = false, updatable = false)
     private Slot slot;
 
-    @MapsId("userId")
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
 
-    @MapsId("vehicleId")
     @ManyToOne
-    @JoinColumn(name = "vehicle_id", nullable = false)
+    @JoinColumn(name = "vehicleId", insertable = false, updatable = false)
     private Vehicle vehicle;
 
     private Integer duration;

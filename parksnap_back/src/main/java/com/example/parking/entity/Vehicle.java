@@ -13,14 +13,14 @@ import lombok.NoArgsConstructor;
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int vehicleID;
+    private int vehicleId;
 
     private String licensePlate;
 
     private String type;
 
     @ManyToOne
-    @JoinColumn(name = "userID")
+    @JoinColumn(name = "userId")
     private User user;
 
 

@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Embeddable
 public class ReservationId implements Serializable {
 
-    private Long slotId;
-    private Long userId;
-    private Long vehicleId;
+    private int slotId;
+    private int userId;
+    private int vehicleId;
 }
