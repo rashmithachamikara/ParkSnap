@@ -12,8 +12,13 @@ import java.time.LocalDateTime;
 @Table(name = "Reservation")
 public class Reservation {
 
-    @EmbeddedId
-    private ReservationId id;
+    @Id
+    private int reservationId;
+
+    private int slotId;
+    private int userId;
+    private int vehicleId;
+    private LocalDateTime startTime;
 
     @ManyToOne
     @JoinColumn(name = "slotId", insertable = false, updatable = false)
@@ -27,7 +32,5 @@ public class Reservation {
     @JoinColumn(name = "vehicleId", insertable = false, updatable = false)
     private Vehicle vehicle;
 
-    private Integer duration;
 
-    private LocalDateTime startTime;
 }

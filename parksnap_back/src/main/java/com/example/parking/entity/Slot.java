@@ -15,11 +15,11 @@ public class Slot {
 
     public int slotId;
 
-    public String type;
-
     @ManyToOne
     @JoinColumn(name = "lotID")
     private Lot lot;
 
-
+    @ManyToOne
+    @JoinColumn(name = "typeId")
+    private SlotType slotType;
 }

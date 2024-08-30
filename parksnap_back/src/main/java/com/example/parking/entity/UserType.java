@@ -5,21 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "Vehicle")
-public class Vehicle {
+@Table(name = "UserType")
+public class UserType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int vehicleId;
+    private int typeId;
 
-    private String licensePlate;
+    private String typeName;
 
-    private String type;
-
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user;
+    @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL)
+    private Set<User> users;
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -15,17 +16,21 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int userId;
+    private int userId;
 
-    public String name;
+    private String name;
 
-    public String phoneNo;
+    private String phoneNo;
 
-    public String username;
+    private String username;
 
-    public String password;
+    private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Vehicle> vehicles;
+
+    @ManyToOne
+    @JoinColumn(name = "typeId")
+    private UserType userType;
 
 }
