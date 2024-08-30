@@ -16,7 +16,7 @@ public class Slot {
     public int slotId;
 
     @ManyToOne
-    @JoinColumn(name = "lotID")
+    @JoinColumn(name = "lotId")
     private Lot lot;
 
     @ManyToOne
