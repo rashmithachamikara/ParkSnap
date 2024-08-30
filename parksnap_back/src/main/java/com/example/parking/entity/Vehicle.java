@@ -16,7 +16,6 @@ public class Vehicle {
     private int vehicleId;
 
     private String licensePlate;
-
     private String type;
 
     @ManyToOne

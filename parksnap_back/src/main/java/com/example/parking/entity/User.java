@@ -19,11 +19,8 @@ public class User {
     private int userId;
 
     private String name;
-
     private String phoneNo;
-
     private String username;
-
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

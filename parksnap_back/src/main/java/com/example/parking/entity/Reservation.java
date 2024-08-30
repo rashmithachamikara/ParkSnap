@@ -31,6 +31,4 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "vehicleId", insertable = false, updatable = false)
     private Vehicle vehicle;
-
-
 }

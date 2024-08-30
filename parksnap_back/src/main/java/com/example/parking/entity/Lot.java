@@ -19,7 +19,6 @@ public class Lot {
     private int lotId;
 
     private String location;
-
     private int noOfSlots;
 
     @OneToMany(mappedBy = "lot", cascade = CascadeType.ALL)
