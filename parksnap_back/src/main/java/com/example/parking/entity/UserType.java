@@ -14,7 +14,6 @@ import java.util.Set;
 @Table(name = "UserType")
 public class UserType {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int typeId;
 
     private String typeName;
