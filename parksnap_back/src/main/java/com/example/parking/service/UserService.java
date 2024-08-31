@@ -3,6 +3,7 @@ package com.example.parking.service;
 import com.example.parking.dto.UserDTO;
 import com.example.parking.entity.User;
 import com.example.parking.repo.UserRepo;
+import com.example.parking.util.VarList;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,15 @@ public class UserService {
             return modelMapper.map(user,UserDTO.class);
         } else {
             return null;
+        }
+    }
+
+    public String updateUser(UserDTO userDTO) {
+        if (userRepo.existsById(userDTO.getUserId())) {
+            userRepo.save(modelMapper.map(userDTO,User.class));
+            return VarList.RSP_SUCCESS;
+        } else {
+            return VarList.RSP_NO_DATA_FOUND;
         }
     }
 }

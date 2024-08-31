@@ -1,10 +1,11 @@
 package com.example.parking.service;
 
-import com.example.parking.dto.UserDTO;
 import com.example.parking.dto.VehicleDTO;
+import com.example.parking.entity.User;
 import com.example.parking.entity.Vehicle;
 import com.example.parking.repo.UserRepo;
 import com.example.parking.repo.VehicleRepo;
+import com.example.parking.util.VarList;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,15 @@ public class VehicleService {
             return modelMapper.map(vehicleList, new TypeToken<List<VehicleDTO>>() {}.getType());
         } else {
             return null;
+        }
+    }
+
+    public String updateVehicle(VehicleDTO vehicleDTO) {
+        if (vehicleRepo.existsById(vehicleDTO.getVehicleId())) {
+            vehicleRepo.save(modelMapper.map(vehicleDTO, Vehicle.class));
+            return VarList.RSP_SUCCESS;
+        } else {
+            return VarList.RSP_NO_DATA_FOUND;
         }
     }
 }

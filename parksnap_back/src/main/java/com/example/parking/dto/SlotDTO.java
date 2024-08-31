@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class SlotDTO {
-    public int slotID;
+    public int slotId;
     public String type;
 
 }
