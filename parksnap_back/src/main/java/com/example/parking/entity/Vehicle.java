@@ -16,9 +16,12 @@ public class Vehicle {
     private int vehicleId;
 
     private String licensePlate;
-    private String type;
 
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "typeId")
+    private VehicleType vehicleType;
 }
