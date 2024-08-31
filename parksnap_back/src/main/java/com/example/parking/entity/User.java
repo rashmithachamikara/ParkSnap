@@ -29,5 +29,4 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "typeId")
     private UserType userType;
-
 }
