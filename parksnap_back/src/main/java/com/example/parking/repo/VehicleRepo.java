@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface VehicleRepo extends JpaRepository<Vehicle, String> {
+public interface VehicleRepo extends JpaRepository<Vehicle, Integer> {
     @Query("SELECT v FROM Vehicle v WHERE v.user.userId = :userId")
     List<Vehicle> getVehiclesByUserId(@Param("userId") int userId);
 }

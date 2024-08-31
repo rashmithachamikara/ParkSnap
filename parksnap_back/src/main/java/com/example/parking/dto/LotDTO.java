@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class LotDTO {
-    private int lotID;
+    private int lotId;
     private String location;
     private int noOfSlots;
 }

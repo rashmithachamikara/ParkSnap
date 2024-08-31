@@ -25,7 +25,7 @@ public class LotService {
     private ModelMapper modelMapper;
 
     public String saveLot(LotDTO lotDTO){
-        if(lotRepo.existsById(lotDTO.getLotID())){
+        if(lotRepo.existsById(lotDTO.getLotId())){
             return VarList.RSP_DUPLICATED;
         }else{
             lotRepo.save(modelMapper.map(lotDTO, Lot.class));
@@ -34,7 +34,7 @@ public class LotService {
         }
     }
     public String updateLot(LotDTO lotDTO){
-        if(lotRepo.existsById(lotDTO.getLotID())){
+        if(lotRepo.existsById(lotDTO.getLotId())){
             lotRepo.save(modelMapper.map(lotDTO,Lot.class));
             return VarList.RSP_SUCCESS;
         }else{
