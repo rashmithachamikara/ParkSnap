@@ -1,0 +1,58 @@
+/* src/HomePage.css */
+.homepage {
+  background: #0d0b33; /* Main background color */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+.logo {
+  margin-bottom: 20px;
+}
+
+.logo-line {
+  display: block;
+  width: 50px;
+  height: 6px;
+  background-color: #ff00ff; /* Pink logo color */
+  margin: 0 auto 10px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #b8b8d4;
+}
+
+.button-container {
+  width: 200px; /* Set a common width for the button container */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between the buttons */
+}
+
+.register-btn,
+.signin-btn {
+  background-color: #cf4af3 !important; /* Updated button color with !important */
+  border: none !important;
+  border-radius: 25px !important;
+  padding: 10px 20px !important;
+  font-size: 1.1rem !important;
+  color: #ffffff !important; /* Text color */
+  width: 100%; /* Make both buttons take the full width of the container */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition effect */
+}
+
+.register-btn:hover,
+.signin-btn:hover {
+  background-color: #b138d6 !important; /* Darker shade for hover effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
