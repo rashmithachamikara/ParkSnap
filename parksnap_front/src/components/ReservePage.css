@@ -1,0 +1,42 @@
+/* src/ReservePage.css */
+.reserve-container {
+    background: #0d0b33; /* Main background color matching HomePage */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .card {
+    background-color: #1c1938; /* Darker background for the card */
+    border: none;
+    color: #ffffff; /* Text color */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Light shadow for elevation */
+    border-radius: 15px;
+  }
+  
+  .card-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  .card-text {
+    color: #b8b8d4; /* Light grey text for readability */
+  }
+  
+  .btn-primary {
+    background-color: #cf4af3 !important; /* Primary button color */
+    border: none !important;
+    border-radius: 25px !important;
+    padding: 10px 20px !important;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .btn-primary:hover {
+    background-color: #b138d6 !important; /* Darker shade on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  

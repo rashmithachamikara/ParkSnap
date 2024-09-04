@@ -1,0 +1,102 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0d0b33;
+    color: #fff;
+}
+
+.signup-card {
+    background-color: #2b2846;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.text-center {
+    color: #fff;
+}
+
+.login-link {
+    color: #8a84d4;
+    text-decoration: none;
+}
+
+.section-title {
+    color: #cf4af3;
+    text-align: center;
+}
+
+.form-label {
+    color: #fff;
+}
+
+.form-control {
+    background-color: #504a76;
+    color: #fff;
+    border: none;
+}
+
+.signup-button {
+    background-color: #cf4af3;
+    border: none;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+/* SignUpForm.css */
+
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-select {
+    width: 100%;
+    padding-right: 30px; /* Space for the arrow */
+    padding-left: 10px;
+    appearance: none; /* Remove default arrow */
+    background-color: #504a76;
+    color: #fff;
+    border: none;
+    height: 38px;
+    border-radius: 5px;
+    font-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+.custom-select-wrapper::after {
+    content: '↓'; /* Add a down arrow icon */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 16px;
+    color: #fff;
+}
+
+.custom-select:focus {
+    outline: none;
+}
+
+select {
+    max-height: 200px; /* Limit the height of the dropdown */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    background-color: #504a76;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+select option {
+    background-color: #504a76;
+    color: #fff;
+}
