@@ -22,4 +22,12 @@ public class Slot {
     @ManyToOne
     @JoinColumn(name = "typeId")
     private SlotType slotType;
+
+
+    public Integer getId() {
+        return slotId;
+    }
+    public void setId(Integer slotId) {
+        this.slotId = slotId;
+    }
 }
