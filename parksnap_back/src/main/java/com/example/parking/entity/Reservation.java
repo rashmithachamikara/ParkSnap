@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class Reservation {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)// Database should be altered separately
     private int reservationId;
 
     private int slotId;
