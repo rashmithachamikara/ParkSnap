@@ -10,6 +10,7 @@ public class ParkingApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ParkingApplication.class, args);
+		System.out.println("Swagger Address: http://localhost:8080/swagger-ui/index.html");
 	}
 
 	@Bean
