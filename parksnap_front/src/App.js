@@ -5,6 +5,7 @@ import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
 import ParkingSelection from './components/ParkingSlotSelection';
 import UserProfile from './components/UserProfile';
+import Contactus from './components/Contactus';
 import AboutUs from './components/AboutUsPage';
 //import Footer from './components/Footer';
 import SignUpForm from './components/SignUpForm';
@@ -21,6 +22,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/reserveSlot" element={<ParkingSelection />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/contact" element={<Contactus/>}/>
         <Route path="/about" element={<AboutUs />} />
         <Route path="/signUp" element={<SignUpForm />} />
         <Route path="/resetpw" element={<Resetpw/>} />
