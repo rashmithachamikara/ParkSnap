@@ -8,7 +8,7 @@ function Reserve() {
   return (
     <>
       <NavigationBar />
-      <div className="reserve-container mt-5 pt-5">
+      <div className="reserve-container pt-5">
         <Card className="text-center">
           <Card.Body>
             <Card.Title>Start Your Day with Easy Parking</Card.Title>

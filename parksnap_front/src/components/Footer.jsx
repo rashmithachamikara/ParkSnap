@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 
 function Footer() {
   return (
-    <footer className="bg-dark text-white mt-5 p-4 text-center">
+    <footer className="bg-dark text-white p-4 text-center">
       <Container>
         <p>&copy; 2024 Faculty of IT - University of Moratuwa. All Rights Reserved.</p>
         <p>
