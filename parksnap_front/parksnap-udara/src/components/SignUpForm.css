@@ -1,0 +1,136 @@
+/* Container styling */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0d0b33;
+    color: #fff;
+    padding: 20px; /* Added some padding to prevent content from touching the edges */
+}
+
+/* Card styling */
+.signup-card {
+    background-color: #2b2846;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow for a raised effect */
+}
+
+/* Title and link styling */
+.text-center {
+    color: #fff;
+}
+
+.login-link {
+    color: #8a84d4;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth transition for hover */
+}
+
+.login-link:hover {
+    color: #cf4af3; /* Lighten color on hover */
+}
+
+/* Section titles */
+.section-title {
+    color: #cf4af3;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-label {
+    color: #ffffff !important; /* Set label color to white and add !important */
+    font-weight: bold; /* Optional: make the labels bold for readability */
+}
+
+.f-titles .form-label, 
+.f-titles label {
+    color: #ffffff !important; /* Ensure all labels within .f-titles are white */
+}
+
+
+/* Form control styling */
+.form-control {
+    background-color: #504a76;
+    color: #fff;
+    border: none;
+}
+
+.form-control:focus {
+    border: 1px solid #cf4af3; /* Highlight border when focused */
+    box-shadow: 0 0 5px rgba(207, 74, 243, 0.5); /* Subtle glow on focus */
+}
+
+/* Submit button styling */
+.signup-button {
+    background-color: #ad2ad1 !important;
+    border: none;
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease; /* Added transform transition */
+    border-radius: 5px;
+}
+
+.signup-button:hover {
+    background-color: #71128c !important; /* Darker shade on hover */
+    transform: translateY(-2px); /* Create a push effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow on hover for a raised look */
+}
+
+/* Custom select dropdown */
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-select {
+    width: 100%;
+    padding-right: 30px; /* Space for the arrow */
+    padding-left: 10px;
+    appearance: none; /* Remove default arrow */
+    background-color: #504a76;
+    color: #fff;
+    border: none;
+    height: 38px;
+    border-radius: 5px;
+    font-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+.custom-select-wrapper::after {
+    content: '↓'; /* Add a down arrow icon */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 16px;
+    color: #fff;
+}
+
+.custom-select:focus {
+    outline: none;
+}
+
+select {
+    max-height: 200px; /* Limit the height of the dropdown */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    background-color: #504a76;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+select option {
+    background-color: #504a76;
+    color: #fff;
+}

@@ -1,0 +1,70 @@
+/* src/components/LoginPage.css */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0d0b33;
+}
+
+.login-form {
+    background-color: #2b2846;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.login-form label {
+    color: #fff;
+}
+
+.login-form input {
+    background-color: #877bd5;
+    color: #fff;
+    border: none;
+}
+
+.login-form .btn-primary {
+    background-color: #cf4af3;
+    border: none;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.login-form .checkbox {
+    color: #fff;
+}
+
+
+.login-form .titles {
+    color: #fff !important;
+    text-decoration: none;
+}
+.login-form .forgot-password {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.login-form .forgot-password a {
+    color: #8a84d4;
+    text-decoration: none;
+}
+
+.sign-up-text {
+    text-align: center;
+    margin-top: 10px;
+    color: #8a84d4;
+}
+
+.sign-up-text span {
+    color: #cf4af3;
+    cursor: pointer;
+}
+
+.welcome-text {
+    text-align: center;
+    color: #fff;
+}
+
+.welcome-text h1 span {
+    color: #cf4af3;
+}
