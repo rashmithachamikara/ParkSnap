@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Slots.css';
 import Weather from './Weather';
 import Pop from './Pop'; // Import the updated Popup component
+import NavigationBar from './Navbar';
 
 const Slots = () => {
   const [availableSlots, setAvailableSlots] = useState(17);
@@ -23,95 +24,99 @@ const Slots = () => {
   };
 
   return (
-    <div className="App">
-      <h2>Reserve a Parking Slot</h2>
-      <header className="App-header">
-        <div className="slot-summary">
-          <div className="summary-item">Available slots: {availableSlots}</div>
-          <div className="summary-item">Occupied slots: {occupiedSlots}</div>
-          <div className="summary-item">Remaining slots: {remainingSlots}</div>
-        </div>
-        <div>
-          <Weather />
-        </div>
-      </header>
+    <>
+      <NavigationBar />
+      <div className="App">
+        <h2>Reserve a Parking Slot</h2>
+        <header className="App-header">
+          <div className="slot-summary">
+            <div className="summary-item">Available slots: {availableSlots}</div>
+            <div className="summary-item">Occupied slots: {occupiedSlots}</div>
+            <div className="summary-item">Remaining slots: {remainingSlots}</div>
+          </div>
+          <div>
+            <Weather />
+          </div>
+        </header>
 
-      <div className="lot-buttons">
-        <button
-          className={`lot-button ${visibleLot === 'Lot1' ? 'active' : ''}`}
-          onClick={() => showLot('Lot1')}
-        >
-          Lot 1
-        </button>
-        <button
-          className={`lot-button ${visibleLot === 'Lot2' ? 'active' : ''}`}
-          onClick={() => showLot('Lot2')}
-        >
-          Lot 2
-        </button>
-      </div>
+        <div className="lot-buttons">
+          <button
+            className={`lot-button ${visibleLot === 'Lot1' ? 'active' : ''}`}
+            onClick={() => showLot('Lot1')}
+          >
+            Lot 1
+          </button>
+          <button
+            className={`lot-button ${visibleLot === 'Lot2' ? 'active' : ''}`}
+            onClick={() => showLot('Lot2')}
+          >
+            Lot 2
+          </button>
+        </div>
 
-      <div className="parking-lots">
-        {visibleLot === 'Lot1' && (
-          <div className="lot">
-            <h2>Lot 1</h2>
-            <div className='mainslot'>
-              <div className="slots">
-                {Array.from({ length: 9 }, (_, index) => (
-                  <Slot 
-                    key={index + 1} 
-                    number={index + 1} 
-                    onClick={handleSlotClick} 
-                  />
-                ))}
-              </div>
-              <div className="slotssmall">
-                {Array.from({ length: 8 }, (_, index) => (
-                  <Slot 
-                    key={index + 10} 
-                    number={index + 10} 
-                    onClick={handleSlotClick} 
-                  />
-                ))}
+        <div className="parking-lots">
+          {visibleLot === 'Lot1' && (
+            <div className="lot">
+              <h2>Lot 1</h2>
+              <div className='mainslot'>
+                <div className="slots">
+                  {Array.from({ length: 9 }, (_, index) => (
+                    <Slot
+                      key={index + 1}
+                      number={index + 1}
+                      onClick={handleSlotClick}
+                    />
+                  ))}
+                </div>
+                <div className="slotssmall">
+                  {Array.from({ length: 8 }, (_, index) => (
+                    <Slot
+                      key={index + 10}
+                      number={index + 10}
+                      onClick={handleSlotClick}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {visibleLot === 'Lot2' && (
-          <div className="lot">
-            <h2>Lot 2</h2>
-            <div className='mainslot'>
-              <div className="slots">
-                {Array.from({ length: 9 }, (_, index) => (
-                  <Slot 
-                    key={index + 1} 
-                    number={index + 1} 
-                    onClick={handleSlotClick} 
-                  />
-                ))}
-              </div>
-              <div className="slotssmall">
-                {Array.from({ length: 8 }, (_, index) => (
-                  <Slot 
-                    key={index + 10} 
-                    number={index + 10} 
-                    onClick={handleSlotClick} 
-                  />
-                ))}
+          {visibleLot === 'Lot2' && (
+            <div className="lot">
+              <h2>Lot 2</h2>
+              <div className='mainslot'>
+                <div className="slots">
+                  {Array.from({ length: 9 }, (_, index) => (
+                    <Slot
+                      key={index + 1}
+                      number={index + 1}
+                      onClick={handleSlotClick}
+                    />
+                  ))}
+                </div>
+                <div className="slotssmall">
+                  {Array.from({ length: 8 }, (_, index) => (
+                    <Slot
+                      key={index + 10}
+                      number={index + 10}
+                      onClick={handleSlotClick}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
+        </div>
+
+        {popupSlot && (
+          <Pop
+            number={popupSlot}
+            onClose={closePopup}
+          />
         )}
       </div>
+    </>
 
-      {popupSlot && (
-        <Pop
-          number={popupSlot} 
-          onClose={closePopup} 
-        />
-      )}
-    </div>
   );
 };
 

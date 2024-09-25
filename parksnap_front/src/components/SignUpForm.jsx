@@ -4,7 +4,7 @@ import './SignUpForm.css';
 
 const SignUpForm = () => {
     return (
-        <div className="signup-container mt-5">
+        <div className="signup-container">
             <div className="signup-card">
                 <h2 className="text-center">Create new Account</h2>
                 <p className="text-center">
