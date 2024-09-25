@@ -1,0 +1,86 @@
+.weather {
+    padding: 10px;
+    border-radius: 10px;
+    background-image: linear-gradient(45deg, #2f4680, #500aef);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 200px; /* Ensures a reasonable max width */
+    margin: 10px auto; /* Centers it on the screen */
+}
+
+.cityname {
+    color: #fff;
+    font-size: 14px; /* Slightly bigger font for city name */
+    margin-bottom: 5px;
+}
+
+.datetime {
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.weather-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #fff;
+}
+
+.weather-icon {
+    width: 50px; /* Slightly bigger icon */
+    margin: 10px;
+}
+
+.temperature {
+    color: #fff;
+    font-size: 24px; /* Bigger font for temperature */
+    line-height: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .weather {
+        max-width: 150px;
+    }
+
+    .temperature {
+        font-size: 20px;
+    }
+
+    .cityname {
+        font-size: 12px;
+    }
+
+    .datetime {
+        font-size: 10px;
+    }
+
+    .weather-icon {
+        width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .weather {
+        max-width: 120px;
+        padding: 8px;
+    }
+
+    .temperature {
+        font-size: 18px;
+    }
+
+    .cityname {
+        font-size: 10px;
+    }
+
+    .datetime {
+        font-size: 9px;
+    }
+
+    .weather-icon {
+        width: 30px;
+    }
+}
