@@ -1,0 +1,136 @@
+
+.contact-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px;
+    margin-bottom: 0px;
+    background-color: #0A0322;
+    color: #ffffff;
+    border-radius: 0px;
+    flex-wrap:wrap;
+    gap: 20px;
+
+  }
+  
+  .contact-left {
+    width: 40%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+  }
+  
+  .contact-left h2 {
+    font-family: Raleway;
+    font-weight: Bold;
+  }
+  
+  .contact-left h2 span {
+    color: #A9016D;
+  }
+  
+  .contact-left p {
+    margin: 10px 0 20px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    font-family: Raleway;
+  }
+  
+  .contact-info {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .contact-info li {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-family: Raleway;
+    margin-bottom: 10px;
+  }
+  
+  .contact-info li i {
+    margin-right: 10px;
+    color: #A9016D;
+  }
+  
+  .contact-right {
+  
+    width: 50%;
+    padding: 20px;
+    background-color:#0A0322;
+    border-color: #ffffff;
+    border-radius: 10px;
+    margin-left: 600px;
+    margin-top: -420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+  
+  }
+  
+  .contact-right form {
+    display: flex;
+    flex-direction: column;
+   
+  }
+  
+  .contact-right input,
+  .contact-right textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #DCD7D758;
+    border: 1px solid #ffffff58;
+    color: #ffffff;
+    border-radius: 5px;
+  }
+  
+  .contact-right input::placeholder,
+  .contact-right textarea::placeholder {
+    color: #ffffff;
+    font-family: Raleway;
+  }
+ 
+  
+  .contact-right button {
+    font-family: Raleway;
+    padding: 8px;
+    margin: 10px 0;
+    width:150px;
+    background-image: linear-gradient(to right, #A9016D, #740182);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+  
+  .contact-right button:hover {
+    background-color:#A9016D;
+  }
+ 
+
+  .contact-left, .contact-right {
+   vertical-align: top;
+   width:50%;
+   margin-bottom: 0px;
+
+   
+  }
+  @media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .contact-left, .contact-right {
+        width: 100%;
+        margin: 0; /* Reset margin for smaller screens */
+    }
+}
+
+
+  

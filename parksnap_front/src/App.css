@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center;    /* Center vertically */
-  background-color: #fff; /* Optional: background color */
+  background-color: #FFF; /* Optional: background color */
 }
 
 .full-screen-logo {
@@ -26,7 +26,8 @@ body {
   justify-content: center; /* Centers the form horizontally */
   align-items: center; /* Centers the form vertically */
   min-height: 100vh; /* Full viewport height */
-  background-color: white; /* Background color from the image */
+  background-color: #ffffff; /* Background color from the image */
+
 }
 
 .form-container {
