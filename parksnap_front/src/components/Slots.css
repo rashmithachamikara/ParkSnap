@@ -1,0 +1,442 @@
+.App {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    color: white;
+    background-color: #0A0322;
+    padding: 20px;
+    height: 100vh;
+    overflow: auto; /* Allows scrolling if content overflows */
+}
+
+.App-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap; /* Wraps header content on smaller screens */
+}
+
+.slot-summary {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary-item {
+    padding: 10px;
+    border: 2px solid #E1E0E5;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+
+
+
+.parking-lots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.lot {
+    
+    background-color: #DCD7D7;
+    color: #0A0322;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1200px; /* Limit the max width of the lot */
+    margin-bottom: 20px;
+}
+.mainslot{
+    display: flex;
+    flex-direction: column; /* Stack the large and small slot containers vertically */
+    align-items: center;
+    margin-bottom: 20px;
+}
+.slots {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 slots per row */
+    grid-gap: 20px; /* Adjust gap between slots */
+    margin-bottom: 20px;
+}
+
+.slot {
+    background-color: #740182;
+    border: none;
+    color: white;
+    font-size: 30px;
+    padding: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+    width: 150px;
+    height: 250px;
+}
+.slotssmall{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-gap: 10px; /* Adjust gap between slots */
+    margin-top: -270px;
+    margin-right: -510px;
+}
+.slotssmall .slot {
+    background-color: #740182;
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+    width: 115px;
+    height: 115px;
+}
+.slot:hover {
+    background-color: #0A0322;
+}
+
+
+
+.lot-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Space between buttons and slots */
+    gap: 10px;
+}
+
+.lot-button {
+    background-color: #740182;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.lot-button.active {
+    background-color: #DCD7D7; /* Change color when active */
+    color: #0A0322;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For medium screens like tablets */
+@media (max-width: 1080px) {
+    .slot-summary {
+        
+        align-items: center;
+    }
+
+
+    .slots {
+        grid-template-columns: repeat(6, 1fr); /* 4 slots per row on medium screens */
+        grid-gap: 15px;
+    }
+
+    .slot {
+        width: 135px; /* Slightly smaller slots */
+        height: 185px;
+    }
+    .slotssmall{
+ 
+        grid-gap: 9px; /* Adjust gap between slots */
+        margin-top: -200px;
+        margin-right: -450px;
+    }
+    .slotssmall .slot {
+
+        width: 100px;
+        height: 82px;
+    }
+}
+@media (max-width: 950px) {
+
+
+    .slot-summary {
+        width: 200px;
+        align-items: center;
+    }
+
+
+    .slots {
+        grid-template-columns: repeat(6, 1fr); /* 3 slots per row on small screens */
+        grid-gap: 15px;
+    }
+
+    .slot {
+        width: 110px; /* Smaller slots for mobile */
+        height: 150px;
+        font-size: 25px;
+    }
+
+    .toggle-lot-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+    .slotssmall{
+ 
+        grid-gap: 9px; /* Adjust gap between slots */
+        margin-top: -168px;
+        margin-right: -360px;
+
+    }
+    .slotssmall .slot {
+
+        width: 85px;
+        height: 70px;
+        font-size: 18px;
+        margin-top: -1px;
+    }
+}
+/* For small screens like mobile */
+@media (max-width: 800px) {
+
+
+    .slot-summary {
+        width: 200px;
+        align-items: center;
+    }
+
+
+    .slots {
+        grid-template-columns: repeat(6, 1fr); /* 3 slots per row on small screens */
+        grid-gap: 15px;
+    }
+
+    .slot {
+        width: 90px; /* Smaller slots for mobile */
+        height: 150px;
+        font-size: 25px;
+    }
+
+    .toggle-lot-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+    .slotssmall{
+ 
+        grid-gap: 9px; /* Adjust gap between slots */
+        margin-top: -168px;
+        margin-right: -310px;
+
+    }
+    .slotssmall .slot {
+
+        width: 70px;
+        height: 70px;
+        font-size: 18px;
+        margin-top: -1px;
+    }
+}
+@media (max-width: 680px) {
+    .slot-summary {
+        width: 200px;
+        align-items: center;
+    }
+
+    .slots {
+        grid-template-columns: repeat(6, 1fr); /* 2 slots per row on very small screens */
+        grid-gap: 12px;
+    }
+
+    .slot {
+        width: 80px; /* Even smaller slots */
+        height: 95px;
+        font-size: 18px;
+    }
+
+    .toggle-lot-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    .slotssmall{
+ 
+        grid-gap: 8px; /* Adjust gap between slots */
+        margin-top: -115px;
+        margin-right: -270px;
+    }
+    .slotssmall .slot {
+
+        width: 60px;
+        height: 45px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .slot-summary {
+        width: 200px;
+        align-items: center;
+    }
+
+    .slots {
+        grid-template-columns: repeat(6, 1fr); /* 2 slots per row on very small screens */
+        grid-gap: 12px;
+    }
+
+    .slot {
+        width: 70px; /* Even smaller slots */
+        height: 95px;
+        font-size: 18px;
+    }
+
+    .toggle-lot-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    .slotssmall{
+ 
+        grid-gap: 8px; /* Adjust gap between slots */
+        margin-top: -115px;
+        margin-right: -250px;
+    }
+    .slotssmall .slot {
+
+        width: 50px;
+        height: 46px;
+        font-size: 12px;
+    }
+}
+@media (max-width: 550px) {
+    .slot-summary {
+        width: 150px;
+        align-items: center;
+        font-size: 15px;
+    }
+    .slots {
+        grid-template-columns: repeat(6, 1fr); /* 2 slots per row on very small screens */
+        grid-gap: 10px;
+    }
+
+    .slot {
+        width: 62px; /* Even smaller slots */
+        height: 82px;
+        font-size: 17px;
+    }
+
+    .toggle-lot-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    .slotssmall{
+ 
+        grid-gap: 6px; /* Adjust gap between slots */
+        margin-top: -100px;
+        margin-right: -220px;
+    }
+    .slotssmall .slot {
+        font-size: 11px;
+        width: 45px;
+        height: 36px;
+        padding: 5px;
+    }
+}
+
+/* For extra small screens like very narrow mobile screens */
+@media (max-width: 470px) {
+    .slot-summary {
+        width: 150px;
+        align-items: center;
+        font-size: 15px;
+    }
+    .slots {
+        grid-template-columns: repeat(6, 1fr); /* 2 slots per row on very small screens */
+        grid-gap: 8px;
+    }
+
+    .slot {
+        width: 50px; /* Even smaller slots */
+        height: 65px;
+        font-size: 16px;
+    }
+
+    .toggle-lot-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    .slotssmall{
+ 
+        grid-gap: 6px; /* Adjust gap between slots */
+        margin-top: -85px;
+        margin-right: -170px;
+    }
+    .slotssmall .slot {
+        font-size: 10px;
+        width: 35px;
+        height: 30px;
+        padding: 5px;
+    }
+}
+@media (max-width: 400px) {
+    .slot-summary {
+        width: 150px;
+        align-items: center;
+        font-size: 15px;
+    }
+    .slots {
+        grid-template-columns: repeat(6, 1fr); /* 2 slots per row on very small screens */
+        grid-gap: 8px;
+    }
+
+    .slot {
+        width: 45px; /* Even smaller slots */
+        height: 65px;
+        font-size: 16px;
+    }
+
+    .toggle-lot-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    .slotssmall{
+ 
+        grid-gap: 6px; /* Adjust gap between slots */
+        margin-top: -85px;
+        margin-right: -170px;
+    }
+    .slotssmall .slot {
+        font-size: 10px;
+        width: 32px;
+        height: 30px;
+        padding: 5px;
+    }
+}
+@media (max-width: 360px) {
+    .slot-summary {
+        width: 150px;
+        align-items: center;
+        font-size: 15px;
+    }
+    .slots {
+        grid-template-columns: repeat(6, 1fr); /* 2 slots per row on very small screens */
+        grid-gap: 8px;
+    }
+
+    .slot {
+        width: 40px; /* Even smaller slots */
+        height: 65px;
+        font-size: 16px;
+    }
+
+    .toggle-lot-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    .slotssmall{
+ 
+        grid-gap: 6px; /* Adjust gap between slots */
+        margin-top: -85px;
+        margin-right: -150px;
+    }
+    .slotssmall .slot {
+        font-size: 10px;
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+    }
+}
