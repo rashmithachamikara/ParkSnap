@@ -19,7 +19,7 @@ public class UserDTO {
     public int userId;
     public String name;
     public String phoneNo;
-    public String username;
+    public String email;
     //public String password;
     public int typeId;
 }
