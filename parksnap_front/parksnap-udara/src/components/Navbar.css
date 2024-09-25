@@ -1,0 +1,86 @@
+/* Navbar specific styles */
+.custom-navbar {
+    background-color: #0a0520; /* Set navbar background color */
+    position: relative;
+    z-index: 1000;
+    padding: 0;
+    display: flex;
+    justify-content: space-between; /* Ensures space between the elements */
+    align-items: center;
+  }
+  
+  /* Toggle button on the left */
+  .custom-navbar .navbar-toggler {
+    margin-left: 15px; /* Keep the toggle button on the left */
+    order: 1; /* Ensure the toggle stays on the left */
+  }
+  
+  /* Collapsible navbar menu */
+  .custom-navbar .navbar-collapse {
+    flex-grow: 1;
+    justify-content: space-between;
+    background-color: rgba(52, 58, 64, 0.7);
+    transition: max-height 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  /* Links inside the navbar menu */
+  .custom-navbar .nav-link {
+    color: #ffffff; /* White text for links */
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+  }
+  
+  .custom-navbar .nav-link:hover {
+    color: #e91e63; /* Accent color on hover */
+  }
+  
+  /* Navbar brand and logo alignment */
+  .custom-navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    order: 2; /* Ensure the logo stays on the right */
+    margin-left: auto; /* Push logo to the right */
+  }
+  
+  /* Logo styling */
+  .navbar-logo {
+    height: 40px; /* Adjust logo size */
+    width: 40px; /* Keep width the same as height for circular shape */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    border: 2px solid #0a0520;
+    padding: 2px;
+    margin-left: 10px;
+  }
+  
+  /* Mobile view adjustments */
+  @media (max-width: 991px) {
+    .custom-navbar {
+      justify-content: space-between;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  
+    .custom-navbar .navbar-toggler {
+      order: 1; /* Ensure the toggle button stays on the left */
+    }
+  
+    .custom-navbar .navbar-brand {
+      order: 2; /* Ensure the logo stays on the right */
+      margin-left: auto;
+    }
+  
+    /* Navbar collapse mobile behavior */
+    .custom-navbar .navbar-collapse {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: rgba(52, 58, 64, 0.7);
+    }
+  }
+  
