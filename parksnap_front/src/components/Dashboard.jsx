@@ -1,8 +1,9 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import "./Dashboard.css";      
+import "./Dashboard.css";
 import NavigationBar from './Navbar';
+import Footer from './Footer';
 
 // Register ChartJS components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -47,27 +48,31 @@ const Dashboard = () => {
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#0a042e', color: 'white', fontFamily: 'Arial, sans-serif' }}>
-      <NavigationBar/>
-      <h1 style={{ textAlign: 'center', fontSize: '3rem', color: '#e7008a' }}>Dashboard</h1>
+    <div style={{ backgroundColor: '#0a042e', color: 'white', fontFamily: 'Arial, sans-serif' }}>
+      <NavigationBar />
+      <div style={{padding: '20px'}}>
+        <h1 style={{ textAlign: 'center', fontSize: '3rem', color: '#e7008a' }}>Dashboard</h1>
 
-      {/* Last Week Section */}
-      <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-        <h2>last week</h2>
-        <p>Number of reservations per day</p>
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <Bar data={dataLastWeek} options={options} />
+        {/* Last Week Section */}
+        <div style={{ padding: '20px', textAlign: 'center', marginBottom: '50px' }}>
+          <h2>last week</h2>
+          <p>Number of reservations per day</p>
+          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+            <Bar data={dataLastWeek} options={options} />
+          </div>
+        </div>
+
+        {/* Yesterday Section */}
+        <div style={{ textAlign: 'center' }}>
+          <h2>Yesterday</h2>
+          <p>Number of reservations per hour</p>
+          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+            <Bar data={dataYesterday} options={options} />
+          </div>
         </div>
       </div>
 
-      {/* Yesterday Section */}
-      <div style={{ textAlign: 'center' }}>
-        <h2>Yesterday</h2>
-        <p>Number of reservations per hour</p>
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <Bar data={dataYesterday} options={options} />
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 };

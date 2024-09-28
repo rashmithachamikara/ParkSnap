@@ -18,6 +18,7 @@
 body {
   background-color: #317586; /* Replace with the exact color from the image */
   color: #29c866; /* Optional: Set a default text color if needed */
+  font-family: Raleway, Arial, Helvetica, sans-serif;
 }
 
 /* Ensure the container takes up the full height of the viewport */

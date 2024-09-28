@@ -65,7 +65,6 @@ const Weather = () => {
 
     return (
         <>
-        <NavigationBar/>
         <div className='weather'>
             <p className='cityname'>Malabe</p>
             <p className='datetime'>

@@ -39,8 +39,9 @@ footer {
   }
   
   .contact-left h2 {
-    font-family: Raleway;
+    font-family: Raleway, Arial, Helvetica, sans-serif;
     font-weight: Bold;
+    text-align: left;
   }
   
   .contact-left h2 span {
@@ -52,6 +53,7 @@ footer {
     font-size: 1.1rem;
     line-height: 1.5;
     font-family: Raleway;
+    text-align: left;
   }
   
   .contact-info {

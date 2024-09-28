@@ -1,0 +1,17 @@
+.weather-container{
+    height: 70vh;
+    background-color: #0A0322;
+}
+
+.weather-page .weather{
+    max-width: 400px; /* Increased max width for a larger card */
+    margin: 10px auto; /* Centers it horizontally */
+    position: absolute; /* Absolute positioning for centering */
+    top: 45%; /* Move to the center vertically */
+    left: 50%; /* Move to the center horizontally */
+    transform: translate(-50%, -50%); /* Adjusts the position to be centered */
+}
+
+.footer{
+    position: fixed;
+}

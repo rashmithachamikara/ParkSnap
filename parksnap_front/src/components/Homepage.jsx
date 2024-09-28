@@ -16,18 +16,17 @@ const Homepage = () => {
   return (
 
     <div className="nav">
-    <NavigationBar/>
-    <div className="homepage">
-      <div className="container">
-        <img src={logo} alt="ParkSnap logo" className="logo" />
-        <h1>Start Your Day With Easy Parking</h1>
-        <div className="button-container">
-          <button className="login-button" onClick={handleSignIn}>Login</button>
-          <button className="register-button" onClick={handleRegister}>Register</button>
+      <div className="homepage">
+        <div className="container">
+          <img src={logo} alt="ParkSnap logo" className="logo" />
+          <h1>Start Your Day With Easy Parking</h1>
+          <div className="button-container">
+            <button className="login-button" onClick={handleSignIn}>Login</button>
+            <button className="register-button" onClick={handleRegister}>Register</button>
+          </div>
         </div>
       </div>
-    </div>
-    <Footer/>
+      <Footer />
     </div>
   );
 };

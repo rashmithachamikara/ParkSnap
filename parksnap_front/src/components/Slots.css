@@ -4,7 +4,7 @@
     color: white;
     background-color: #0A0322;
     padding: 20px;
-    height: 100vh;
+    /* height: 100vh; */
     overflow: auto; /* Allows scrolling if content overflows */
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import NavigationBar from './Navbar';
+import Footer from './Footer';
 import './ReservePage.css'; // Import the CSS file
 
 function Reserve() {
@@ -20,6 +21,7 @@ function Reserve() {
           </Card>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

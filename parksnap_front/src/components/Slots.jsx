@@ -3,6 +3,7 @@ import './Slots.css';
 import Weather from './Weather';
 import Pop from './Pop'; // Import the updated Popup component
 import NavigationBar from './Navbar';
+import Footer from './Footer';
 
 const Slots = () => {
   const [availableSlots, setAvailableSlots] = useState(17);
@@ -107,6 +108,7 @@ const Slots = () => {
             </div>
           )}
         </div>
+        
 
         {popupSlot && (
           <Pop
@@ -115,6 +117,7 @@ const Slots = () => {
           />
         )}
       </div>
+      <Footer/>
     </>
 
   );

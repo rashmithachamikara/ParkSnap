@@ -13,10 +13,10 @@ function NavigationBar() {
 
   return (
         <>
-    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="custom-navbar">
+    <Navbar bg="dark" variant="dark" expand="lg" className="custom-navbar">
         <Container fluid>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"  />
-            <Navbar.Brand className="ms-2" href="/">Parking Reservation</Navbar.Brand>
+            <Navbar.Brand className="ms-2" href="/">ParkSnap</Navbar.Brand>
             <Navbar.Collapse id="responsive-navbar-nav">
 
 
