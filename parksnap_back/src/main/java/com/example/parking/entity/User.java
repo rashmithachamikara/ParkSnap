@@ -20,7 +20,7 @@ public class User {
 
     private String name;
     private String phoneNo;
-    private String email;
+    private String username;
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
