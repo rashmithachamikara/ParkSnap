@@ -45,7 +45,7 @@ const SignUpForm = () => {
             <div className="signup-card">
                 <h2 className="text-center">Create new Account</h2>
                 <p className="text-center">
-                    <a href="login" className="login-link">Already Registered? Log in here.</a>
+                    <a href="login" className="login-link">Already Registered? <span>Log in </span>here.</a>
                 </p>
                 <Form onSubmit={handleSubmit}> {/* Form uses onSubmit to handle submission */}
                     <h4 className="section-title">User Details</h4>

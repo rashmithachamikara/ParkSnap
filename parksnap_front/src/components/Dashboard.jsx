@@ -50,7 +50,7 @@ const Dashboard = () => {
   return (
     <div style={{ backgroundColor: '#0a042e', color: 'white', fontFamily: 'Arial, sans-serif' }}>
       <NavigationBar />
-      <div style={{padding: '20px'}}>
+      <div style={{paddingTop: '40px', paddingBottom: '70px'}}>
         <h1 style={{ textAlign: 'center', fontSize: '3rem', color: '#e7008a' }}>Dashboard</h1>
 
         {/* Last Week Section */}

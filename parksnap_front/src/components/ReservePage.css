@@ -39,7 +39,7 @@
 }
 
 /* Card title */
-.card-title {
+.reserve-container .card-title {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 20px;
@@ -47,14 +47,14 @@
 }
 
 /* Card text */
-.card-text {
+.reserve-container .card-text {
   font-size: 1.1rem;
   color: #cfcfe8;
   margin-bottom: 30px;
 }
 
 /* Button styling */
-.btn-primary {
+.reserve-container .btn-primary {
   background-color: #ff4af3 !important;
   border: none !important;
   border-radius: 50px !important;

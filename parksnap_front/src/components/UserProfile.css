@@ -35,6 +35,7 @@
   
   .profile-section {
     margin-bottom: 20px;
+    padding: 20px;
   }
   
   .section-title {
@@ -103,3 +104,12 @@
     transition: 0.3s ease; /* Smooth transition for hover */
   }
   
+
+.profile-page .form-control{
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.profile-page .form-label{
+  margin-top: 15px;
+}

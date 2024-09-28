@@ -9,8 +9,8 @@ function Footer() {
       <Container>
         <p>&copy; 2024 Faculty of IT - University of Moratuwa. All Rights Reserved.</p>
         <p>
-          <a href="/terms" className="text-white">Terms of Use</a> | 
-          <a href="/privacy" className="text-white"> Privacy Policy</a>
+          <a href="/contact" className="text-white">Contact Us</a> | 
+          <a href="/about" className="text-white"> About Us</a>
         </p>
       </Container>
     </footer>

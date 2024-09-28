@@ -24,6 +24,11 @@
     text-decoration: none;
 }
 
+.login-link span {
+    color: #cf4af3;
+    cursor: pointer;
+}
+
 .section-title {
     color: #cf4af3;
     text-align: center;
@@ -44,6 +49,10 @@
     border: none;
     width: 100%;
     margin-top: 20px;
+}
+
+.signup-container input{
+    margin-bottom: 15px;
 }
 
 

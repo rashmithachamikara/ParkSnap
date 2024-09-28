@@ -9,7 +9,7 @@
 
 .login-form {
     background-color: #2b2846;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
 }
 
@@ -21,13 +21,14 @@
     background-color: #504a76;
     color: #fff;
     border: none;
+    margin-bottom: 20px;
 }
 
 .login-form .btn-primary {
     background-color: #cf4af3;
     border: none;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .login-form .checkbox {
@@ -46,7 +47,7 @@
 
 .sign-up-text {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
     color: #8a84d4;
 }
 
