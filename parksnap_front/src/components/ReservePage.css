@@ -1,42 +1,111 @@
-/* src/ReservePage.css */
+/* General styles for the reserve page */
 .reserve-container {
-    background: #0d0b33; /* Main background color matching HomePage */
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .card {
-    background-color: #1c1938; /* Darker background for the card */
-    border: none;
-    color: #ffffff; /* Text color */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Light shadow for elevation */
-    border-radius: 15px;
+  background: url('../assets/parking_lot.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Hero section for the card */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80vh;
+}
+
+/* Styling the card */
+.hero-card {
+  background: linear-gradient(135deg, #1c1938 0%, #2a2750 100%);
+  border: none;
+  color: #ffffff;
+  padding: 40px 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Card hover effect */
+.hero-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Card title */
+.card-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+/* Card text */
+.card-text {
+  font-size: 1.1rem;
+  color: #cfcfe8;
+  margin-bottom: 30px;
+}
+
+/* Button styling */
+.btn-primary {
+  background-color: #ff4af3 !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 12px 28px !important;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Button hover effect */
+.btn-primary:hover {
+  background-color: #d13cd4 !important;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Ensuring responsiveness */
+@media (max-width: 768px) {
+  .hero-card {
+    padding: 30px 20px;
   }
   
   .card-title {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #ffffff;
+    font-size: 1.6rem;
   }
-  
+
   .card-text {
-    color: #b8b8d4; /* Light grey text for readability */
+    font-size: 1rem;
   }
-  
+
   .btn-primary {
-    background-color: #cf4af3 !important; /* Primary button color */
-    border: none !important;
-    border-radius: 25px !important;
-    padding: 10px 20px !important;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+    padding: 10px 24px !important;
+    font-size: 1rem;
   }
-  
-  .btn-primary:hover {
-    background-color: #b138d6 !important; /* Darker shade on hover */
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 480px) {
+  .hero-card {
+    padding: 20px 15px;
   }
-  
+
+  .card-title {
+    font-size: 1.4rem;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+  }
+
+  .btn-primary {
+    padding: 8px 20px !important;
+    font-size: 0.9rem;
+  }
+}

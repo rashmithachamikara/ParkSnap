@@ -1,0 +1,105 @@
+/* General styles */
+.profile-page {
+    background-color: #1E1029;
+    min-height: 100vh;
+    padding: 20px;
+    color: #e5e5e5;
+  }
+  
+  .profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .profile-card {
+    background-color: #261538;
+    border-radius: 10px;
+    overflow: hidden;
+    color: #e5e5e5;
+    border: none;
+  }
+  
+  .profile-header {
+    background-color: #3d194d;
+    text-align: center;
+    padding: 15px 0;
+    border-bottom: 0;
+    color: #ff007f;
+  }
+  
+  .profile-header h4 {
+    margin: 0;
+    font-weight: 500;
+  }
+  
+  .profile-section {
+    margin-bottom: 20px;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff007f;
+    border-bottom: 1px solid #ff007f;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .profile-info {
+    font-size: 1rem;
+    color: #e5e5e5;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-info .icon {
+    margin-right: 10px;
+    color: #ff007f;
+    font-size: 1.2rem;
+  }
+  
+  .vehicle-placeholder-box {
+    width: 100%;
+    height: 150px;
+    background-color: #1e1029;
+    border: 1px solid #ff007f;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff007f;
+    font-size: 0.9rem;
+  }
+  
+  /* Uploaded Image */
+  .uploaded-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  /* Edit Profile Button */
+  .edit-profile-btn {
+    background: linear-gradient(90deg, #007bff, #0066ff); /* Slight blue effect */
+    border: none;
+    color: white;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+
+    width: 160px; /* Set desired width */
+    height: 50px; /* Set desired height */
+  }
+  
+  .edit-profile-btn:hover {
+    background-color: #e91e63 !important; /* Ensure hover effect works with !important */
+    color: white;
+    transition: 0.3s ease; /* Smooth transition for hover */
+  }
+  

@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1, h2, p {
+    margin: 0;
+    padding: 10px 0;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    color: #e7008a;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    color: white;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+  }
+  
+  div {
+    margin-bottom: 0px;
+  }
+  
+  .chart-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .dashboard {
+    padding: 20px;
+    background-color: #0a042e;
+    color: white;
+  }
+  

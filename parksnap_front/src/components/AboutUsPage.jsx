@@ -1,31 +1,42 @@
-import React from 'react';
-import { Container, Row, Col, Image } from 'react-bootstrap';
-import Footer from './Footer'; // Adjust the path if needed
-import './AboutUsPage.css'; // Import your CSS file
+import React from "react";
+import "./AboutUsPage.css";
+import image from '../assets/team.jpg';
+import NavigationBar from "./Navbar";
+import Footer from "./Footer";
 
-const AboutUsPage = () => {
+
+const AboutUs = () => {
   return (
-    <div className="about-us-page">
-      <header className="about-header">
-        <h1>About Us</h1>
-        <p>We are dedicated to making your parking experience easier and more efficient.</p>
+    <div className="about-container">
+      <NavigationBar/>
+      <header className="header">
+        <h1>ABOUT <section className="us">US</section></h1>
       </header>
 
-      {/* Team Members Section */}
-      <Container className="main-content">
-        <Row className="team-members">
-          <Col xs={12} md={4} className="text-center mb-4">
-            <Image src="path/to/member1.jpg" roundedCircle fluid alt="Team Member 1" />
-            <h4>Member Name</h4>
-            <p>Position</p>
-          </Col>
-          {/* Add more Col elements for additional team members */}
-        </Row>
-      </Container>
+      <div className="content">
+        <p>
+          Welcome to <b>Park Snap</b>, the vehicle parking management system for LSEG.
+          Developed by students from the University of Moratuwa IT Faculty, Park
+          Snap is designed to make parking at LSEG easy and efficient.
+        
+        
+          This project combines the innovative spirit of our students with the
+          expertise of LSEG to create a smart, user-friendly parking solution.
+          We're proud to offer a system that simplifies parking management and
+          enhances the overall experience for everyone.
+        </p>
+        
+        <img
+          className="team-photo"
+          src={image}
+          alt="Team"
+          
+        /> 
+      </div>
 
-      <Footer />
+    <Footer/> 
     </div>
   );
 };
 
-export default AboutUsPage;
+export default AboutUs;

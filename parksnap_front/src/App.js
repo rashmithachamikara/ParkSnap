@@ -7,10 +7,10 @@ import Slots from './components/Slots';  // Updated to use Slots
 import UserProfile from './components/UserProfile';
 import Contactus from './components/Contactus';
 import AboutUs from './components/AboutUsPage';
-//import Footer from './components/Footer';
 import SignUpForm from './components/SignUpForm';
 import Reserve from './components/Reservepage';
 import Resetpw from './components/Resetpw';
+import Weather from './components/Weather';
 
 function App() {
   return (
@@ -26,8 +26,10 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/signUp" element={<SignUpForm />} />
         <Route path="/resetpw" element={<Resetpw />} />
+        <Route path="/weather" element={<Weather />} />
+        
+
       </Routes>
-      {/* <Footer />  */}
     </Router>
   );
 }

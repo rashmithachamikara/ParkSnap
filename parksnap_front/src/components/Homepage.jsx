@@ -1,7 +1,8 @@
-// src/HomePage.js
 import React from 'react';
 import './Homepage.css';
 import logo from '../assets/parksnap_logo.png'; // Make sure to place parksnap.png in the src folder
+import NavigationBar from './Navbar';
+import Footer from './Footer';
 
 const Homepage = () => {
   const handleRegister = () => {
@@ -13,6 +14,9 @@ const Homepage = () => {
   };
 
   return (
+
+    <div className="nav">
+    <NavigationBar/>
     <div className="homepage">
       <div className="container">
         <img src={logo} alt="ParkSnap logo" className="logo" />
@@ -21,8 +25,9 @@ const Homepage = () => {
           <button className="login-button" onClick={handleSignIn}>Login</button>
           <button className="register-button" onClick={handleRegister}>Register</button>
         </div>
-        <footer>© 2024 ParkSnap. Designed By TechTuners.</footer>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 };
