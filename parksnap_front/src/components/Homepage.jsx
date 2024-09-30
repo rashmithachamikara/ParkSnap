@@ -1,6 +1,6 @@
 import React from 'react';
 import './Homepage.css';
-import logo from '../assets/parksnap_logo.png'; // Make sure to place parksnap.png in the src folder
+import logo from '../Assets/parksnap_logo.png'; // Make sure to place parksnap.png in the src folder
 import NavigationBar from './Navbar';
 import Footer from './Footer';
 
