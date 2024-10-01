@@ -6,11 +6,6 @@ import './Navbar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 function NavigationBar() {
 
-    // const [show, setShow] = useState(false);
-
-    // const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
-
   return (
         <>
     <Navbar bg="dark" variant="dark" expand="lg" className="custom-navbar">

@@ -104,31 +104,6 @@ const SignUpForm = () => {
                         </Col>
                     </Row>
 
-                    <Row>
-                        <Col>
-                            <Form.Group controlId="formPhone2">
-                                <Form.Label>Phone Number 2</Form.Label>
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="Enter phone number 2" 
-                                    name="phone2" 
-                                    value={formData.phone2} 
-                                    onChange={handleChange} 
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group controlId="formProfilePicture">
-                                <Form.Label>Profile Picture</Form.Label>
-                                <Form.Control 
-                                    type="file" 
-                                    name="profilePicture" 
-                                    onChange={(e) => setFormData({ ...formData, profilePicture: e.target.files[0] })}
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-
 
                     <Button variant="light" type="submit" className="signup-button">
                         Continue to Vehicle Details

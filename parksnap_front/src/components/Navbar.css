@@ -12,6 +12,10 @@ body {
   /* Smooth transitions */
 }
 
+.custom-navbar{
+  z-index: 1;
+}
+
 .custom-navbar .nav-link:hover {
   color: #e91e63;
   /* Accent color on hover */
