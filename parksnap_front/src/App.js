@@ -11,8 +11,8 @@ import AboutUs from './components/AboutUsPage';
 import SignUpForm from './components/SignUpForm';
 import Reserve from './components/Reservepage';
 import Resetpw from './components/Resetpw';
-import Weather from './components/Weather';
 import WeatherPage from './components/WeatherPage';
+import VehicleDetails from './components/VehicleDetails';
 
 
 function App() {
@@ -30,6 +30,8 @@ function App() {
         <Route path="/signUp" element={<SignUpForm />} />
         <Route path="/resetpw" element={<Resetpw />} />
         <Route path="/weather" element={<WeatherPage />} />
+        <Route path="/vehicle-details" element={<VehicleDetails />} />
+        
         
 
       </Routes>

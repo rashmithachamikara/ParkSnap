@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Card, Row, Col, Button, Form } from 'react-bootstrap';
 import { FaUser, FaEnvelope, FaPhone, FaBuilding, FaCar, FaHashtag } from 'react-icons/fa';
-import './UserProfile.css'; // Import the CSS file
+import './UserProfile.css'; 
 import NavigationBar from './Navbar';
 import Footer from './Footer';
 
@@ -109,48 +109,57 @@ function UserProfile() {
                       </Card.Text>
                     </>
                   )}
-                  <Button className="edit-profile-btn" onClick={handleEditClick}>
-                    {isEditing ? "Save Profile" : "Edit Profile"}
-                  </Button>
                 </Col>
 
                 {/* Vehicle Information Section */}
                 <Col md={6} className="profile-section">
                   <h5 className="section-title">Vehicle Information</h5>
-                  <Card.Text className="profile-info">
-                    <FaCar className="icon" /> <strong>Vehicle Type:</strong> {userData.vehicleType}
-                  </Card.Text>
-                  <Card.Text className="profile-info">
-                    <FaHashtag className="icon" /> <strong>Number Plate:</strong> {userData.numberPlate}
-                  </Card.Text>
-
-                  {/* Show image placeholder or uploaded image */}
-                  <div className="vehicle-image-placeholder mt-4 text-center">
-                    {vehicleImage ? (
-                      <img src={vehicleImage} alt="Vehicle" className="uploaded-image" />
-                    ) : (
-                      <div className="vehicle-placeholder-box">
-                        Vehicle Image Placeholder
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Show image upload input when editing */}
-                  {isEditing && (
-                    <Form.Group controlId="formVehicleImage" className="mt-3">
-                      <Form.Label>Upload Vehicle Image</Form.Label>
-                      <Form.Control type="file" accept="image/*" onChange={handleImageUpload} />
-                    </Form.Group>
+                  {isEditing ? (
+                    <>
+                      <Form.Group controlId="formVehicleType">
+                        <Form.Label><FaCar className="icon" /> Vehicle Type</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="vehicleType"
+                          value={userData.vehicleType}
+                          onChange={handleChange}
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="formNumberPlate">
+                        <Form.Label><FaHashtag className="icon" /> Number Plate</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="numberPlate"
+                          value={userData.numberPlate}
+                          onChange={handleChange}
+                        />
+                      </Form.Group>
+                      
+                    </>
+                  ) : (
+                    <>
+                      <Card.Text className="profile-info">
+                        <FaCar className="icon" /> <strong>Vehicle Type:</strong> {userData.vehicleType}
+                      </Card.Text>
+                      <Card.Text className="profile-info">
+                        <FaHashtag className="icon" /> <strong>Number Plate:</strong> {userData.numberPlate}
+                      </Card.Text>
+                      {vehicleImage && (
+                        <img src={vehicleImage} alt="Vehicle" className="vehicle-image-preview" />
+                      )}
+                    </>
                   )}
                 </Col>
               </Row>
+              <Button className="edit-profile-btn mt-4" onClick={handleEditClick}>
+                {isEditing ? "Save Profile" : "Edit Profile"}
+              </Button>
             </Card.Body>
           </Card>
         </Container>
       </div>
-      <Footer/>
+      <Footer />
     </>
-
   );
 }
 

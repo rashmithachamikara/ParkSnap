@@ -1,6 +1,6 @@
 import React from "react";
 import "./AboutUsPage.css";
-import image from '../assets/team.jpg';
+import image from '../Assets/team.jpg';
 import NavigationBar from "./Navbar";
 import Footer from "./Footer";
 

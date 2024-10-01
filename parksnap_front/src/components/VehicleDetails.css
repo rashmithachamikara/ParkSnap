@@ -1,4 +1,4 @@
-.signup-container {
+.vehicle-details-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +7,7 @@
     color: #fff;
 }
 
-.signup-card {
+.vehicle-details-card {
     background-color: #2b2846;
     padding: 20px;
     border-radius: 10px;
@@ -15,19 +15,19 @@
     max-width: 600px;
 }
 
-.text-center {
-    color: #fff;
-}
-
-.login-link {
-    color: #8a84d4;
-    text-decoration: none;
-}
-
-.login-link span {
+.text-center-vehicle {
     color: #cf4af3;
-    cursor: pointer;
+    text-align: center;
 }
+
+
+.section-underline-vehicle {
+    width: 550px; /* Adjust width as needed */
+    height: 1px;  /* Adjust thickness as needed */
+    background-color: red; /* The color for the red line */
+    margin: 0 auto 20px auto; /* Centers the line and adds spacing */
+}
+
 
 .section-title {
     color: #cf4af3;
@@ -44,14 +44,14 @@
     border: none;
 }
 
-.signup-button {
+.submit-button {
     background-color: #cf4af3;
     border: none;
     width: 100%;
     margin-top: 20px;
 }
 
-.signup-container input {
+.vehicle-details-container input {
     margin-bottom: 15px;
 }
 
