@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axiosInstance from '../axiosInstance'; // Import your axios instance
 import './Slots.css';
 import Weather from './Weather';
 import Pop from './Pop'; // Import the updated Popup component
@@ -6,11 +7,38 @@ import NavigationBar from './Navbar';
 import Footer from './Footer';
 
 const Slots = () => {
-  const [availableSlots, setAvailableSlots] = useState(17);
-  const [occupiedSlots, setOccupiedSlots] = useState(9);
+  const [availableSlots, setAvailableSlots] = useState(0);
+  const [occupiedSlots, setOccupiedSlots] = useState(0);
+  const [totalSlots, setTotalSlots] = useState(0);
   const [visibleLot, setVisibleLot] = useState('Lot1');
   const [popupSlot, setPopupSlot] = useState(null); // State to manage the popup
-  const remainingSlots = availableSlots - occupiedSlots;
+
+  const lotId = visibleLot === 'Lot1' ? 1 : 2; // Map visibleLot to lotId
+  //const remainingSlots = totalSlots - occupiedSlots;
+
+  // Fetch data for the selected lot
+  useEffect(() => {
+    const fetchSlotData = async () => {
+      try {
+        // Fetch total slot count
+        const totalResponse = await axiosInstance.get(`/api/v1/slots/lot/${lotId}/totalCount`);
+        console.log(totalResponse);
+        setTotalSlots(totalResponse.data);
+
+        // Fetch remaining slots
+        const remainingResponse = await axiosInstance.get(`/api/v1/slots/lot/${lotId}/remaining`);
+        setAvailableSlots(remainingResponse.data);
+
+        // Fetch occupied slot count
+        const occupiedResponse = await axiosInstance.get(`/api/v1/slots/lot/${lotId}/occupiedCount`);
+        setOccupiedSlots(occupiedResponse.data);
+      } catch (error) {
+        console.error('Error fetching slot data:', error);
+      }
+    };
+
+    fetchSlotData();
+  }, [lotId]); // Re-fetch data when visibleLot changes
 
   const handleSlotClick = (slotNumber) => {
     setPopupSlot(slotNumber); // Set the slot number to show in the popup
@@ -31,9 +59,9 @@ const Slots = () => {
         <h2>Reserve a Parking Slot</h2>
         <header className="App-header">
           <div className="slot-summary">
-            <div className="summary-item">Available slots: {availableSlots}</div>
+            <div className="summary-item">Total slots: {totalSlots}</div>
             <div className="summary-item">Occupied slots: {occupiedSlots}</div>
-            <div className="summary-item">Remaining slots: {remainingSlots}</div>
+            <div className="summary-item">Available slots: {availableSlots}</div>
           </div>
           <div>
             <Weather />
@@ -63,6 +91,7 @@ const Slots = () => {
                 <div className="slots">
                   {Array.from({ length: 9 }, (_, index) => (
                     <Slot
+                      //Slots in lot 1 starts from 1
                       key={index + 1}
                       number={index + 1}
                       onClick={handleSlotClick}
@@ -72,7 +101,8 @@ const Slots = () => {
                 <div className="slotssmall">
                   {Array.from({ length: 8 }, (_, index) => (
                     <Slot
-                      key={index + 10}
+                      //Slots in lot 2 starts from 21
+                      key={index + 21}
                       number={index + 10}
                       onClick={handleSlotClick}
                     />
@@ -108,7 +138,6 @@ const Slots = () => {
             </div>
           )}
         </div>
-        
 
         {popupSlot && (
           <Pop
@@ -117,9 +146,8 @@ const Slots = () => {
           />
         )}
       </div>
-      <Footer/>
+      <Footer />
     </>
-
   );
 };
 

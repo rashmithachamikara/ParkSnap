@@ -1,19 +1,54 @@
 import React, { useState } from 'react';
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Button, Form, Row, Col, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../axiosInstance'; // Import the custom axios instance
 import './LoginPage.css';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // To store error messages
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Username: ", username);
-    console.log("Password: ", password);
-    navigate('/reserve'); // Navigate to homepage on login
+    setError(''); // Clear previous errors
+
+    const loginData = { username, password };
+
+    try {
+      // Step 1: Make login request
+      const response = await axiosInstance.post('/api/auth/login', loginData);
+
+      if (response.status === 200) {
+        const token = response.data;
+
+        // Step 2: Store the token in localStorage
+        localStorage.setItem('token', token);
+
+        // Step 3: Fetch user details using the /me endpoint
+        const userResponse = await axiosInstance.get('/api/auth/me', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        // Step 4: Store user details in localStorage
+        if (userResponse.status === 200) {
+          const userData = userResponse.data;
+          localStorage.setItem('user', JSON.stringify(userData));
+
+          // Step 5: Navigate to the next page
+          navigate('/reserve');
+        }
+      }
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        setError('Invalid username or password'); // Set error for 401 Unauthorized
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
+    }
   };
 
   const handleSignUp = () => {
@@ -27,6 +62,11 @@ function LoginPage() {
           <div className="welcome-text">
             <h1>Welcome <span>Back!</span></h1>
           </div>
+          {error && (
+            <Alert variant="danger">
+              {error}
+            </Alert>
+          )}
           <Form onSubmit={handleLogin} className="login-form">
             <Form.Group controlId="formUsername">
               <Form.Label>Username</Form.Label>
