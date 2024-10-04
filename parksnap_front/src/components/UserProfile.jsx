@@ -134,7 +134,6 @@ function UserProfile() {
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      
                     </>
                   ) : (
                     <>
