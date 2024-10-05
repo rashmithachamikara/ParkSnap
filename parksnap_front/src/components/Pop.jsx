@@ -43,11 +43,12 @@ const Pop = ({ number, onClose }) => {
       slotId: number,
       userId: user.userId,
       vehicleId: selectedVehicle.vehicleId,
-      startTime: new Date().toISOString()
+      startTime: new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString()
     };
   
     try {
       // Save the reservation
+      console.log('Saving reservation:', reservationData);
       const response = await axiosInstance.post('/api/v1/reservation/saveReservation', reservationData);
   
       // Process the reservation
