@@ -1,24 +1,106 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Card, Row, Col, Button, Form } from 'react-bootstrap';
-import { FaUser, FaEnvelope, FaPhone, FaBuilding, FaCar, FaHashtag } from 'react-icons/fa';
-import './UserProfile.css'; 
+import { FaUser, FaEnvelope, FaPhone, FaCar, FaHashtag } from 'react-icons/fa';
+import './UserProfile.css';
 import NavigationBar from './Navbar';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../axiosInstance'; // Import your axios instance
 
 function UserProfile() {
   const [isEditing, setIsEditing] = useState(false);
-  const [userData, setUserData] = useState({
-    name: "Asitha Udara",
-    email: "udara@example.com",
-    contactNumber: "012 345 6789",
-    department: "Research",
-    vehicleType: "Car",
-    numberPlate: "ABC 800",
-  });
-  const [vehicleImage, setVehicleImage] = useState(null); // Store uploaded image
+  const [userData, setUserData] = useState({});
+  const [vehicleData, setVehicleData] = useState([]);
 
-  const handleEditClick = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axiosInstance.get(`/api/v1/user/getUserById?userId=${user.userId}`);
+        if (response.data.code === '00') {
+          setUserData(response.data.content);
+          console.log('User data:', response.data.content);
+        } else {
+          console.error('Failed to fetch user data');
+        }
+      } catch (error) {
+        console.error('An error occurred while fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, [user.userId]);
+
+  useEffect(() => {
+    const fetchVehicleData = async () => {
+      try {
+        const response = await axiosInstance.get(`/api/v1/vehicle/getVehiclesByUserId?userId=${user.userId}`);
+        if (response.data.code === '00') {
+          setVehicleData(response.data.content);
+          console.log('Vehicle data:', response.data.content);
+        } else {
+          console.error('Failed to fetch vehicle data');
+        }
+      } catch (error) {
+        console.error('An error occurred while fetching vehicle data:', error);
+      }
+    };
+
+    fetchVehicleData();
+  }, [user.userId]);
+
+  const handleEditClick = async () => {
+    if (isEditing) {
+      // Update user details
+      try {
+        const response = await axiosInstance.put('/api/v1/user/updateUser', {
+          userId: user.userId,
+          name: userData.name,
+          phoneNo: userData.phoneNo
+        });
+
+        if (response.data.code !== '00') {
+          console.error('Failed to update user details');
+        }
+      } catch (error) {
+        console.error('An error occurred while updating user details:', error);
+      }
+
+      // Update vehicle details
+      for (let i = 0; i < vehicleData.length; i++) {
+        const vehicle = vehicleData[i];
+
+        console.log('Vehicle:', vehicle);
+
+        // If license plate is empty, skip this vehicle
+        if (!vehicle.licensePlate) {
+          continue;
+        }
+
+        try {
+          const response = await axiosInstance.put('/api/v1/vehicle/updateVehicle', {
+            vehicleId: vehicle.vehicleId,//string to int
+            typeId: parseInt(vehicle.typeId),
+            userId: user.userId,
+            licensePlate: vehicle.licensePlate
+          });
+
+          if (response.data.code !== '00') {
+            console.error(`Failed to update vehicle ${i + 1} details`);
+          }
+        } catch (error) {
+          console.error(`An error occurred while updating vehicle ${i + 1} details:`, error);
+        }
+        window.location.reload(); // Reload the page to see the updated data
+      }
+    }
+
     setIsEditing(!isEditing);
+  };
+
+  const handleCancelClick = () => {
+    window.location.reload(); // Reload the page to cancel editing
   };
 
   const handleChange = (e) => {
@@ -28,16 +110,20 @@ function UserProfile() {
     });
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0]; // Get the uploaded file
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setVehicleImage(reader.result); // Store image data as base64
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleVehicleChange = (index, event) => {
+    const { name, value } = event.target;
+    const updatedVehicleData = [...vehicleData];
+    updatedVehicleData[index] = { ...updatedVehicleData[index], [name]: value };
+    setVehicleData(updatedVehicleData);
   };
+
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/'); // Redirect to home page
+  }
 
   return (
     <>
@@ -65,12 +151,13 @@ function UserProfile() {
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group controlId="formEmail">
-                        <Form.Label><FaEnvelope className="icon" /> Email</Form.Label>
+                      <Form.Group controlId="formUsername">
+                        <Form.Label><FaEnvelope className="icon" /> Username</Form.Label>
                         <Form.Control
-                          type="email"
-                          name="email"
-                          value={userData.email}
+                          type="text"
+                          name="username"
+                          disabled
+                          value={userData.username}
                           onChange={handleChange}
                         />
                       </Form.Group>
@@ -78,17 +165,8 @@ function UserProfile() {
                         <Form.Label><FaPhone className="icon" /> Contact Number</Form.Label>
                         <Form.Control
                           type="text"
-                          name="contactNumber"
-                          value={userData.contactNumber}
-                          onChange={handleChange}
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="formDepartment">
-                        <Form.Label><FaBuilding className="icon" /> Department</Form.Label>
-                        <Form.Control
-                          type="text"
-                          name="department"
-                          value={userData.department}
+                          name="phoneNo"
+                          value={userData.phoneNo}
                           onChange={handleChange}
                         />
                       </Form.Group>
@@ -99,13 +177,10 @@ function UserProfile() {
                         <FaUser className="icon" /> <strong>Name:</strong> {userData.name}
                       </Card.Text>
                       <Card.Text className="profile-info">
-                        <FaEnvelope className="icon" /> <strong>Email:</strong> {userData.email}
+                        <FaEnvelope className="icon" /> <strong>Username:</strong> {userData.username}
                       </Card.Text>
                       <Card.Text className="profile-info">
-                        <FaPhone className="icon" /> <strong>Contact Number:</strong> {userData.contactNumber}
-                      </Card.Text>
-                      <Card.Text className="profile-info">
-                        <FaBuilding className="icon" /> <strong>Department:</strong> {userData.department}
+                        <FaPhone className="icon" /> <strong>Contact Number:</strong> {userData.phoneNo}
                       </Card.Text>
                     </>
                   )}
@@ -115,44 +190,64 @@ function UserProfile() {
                 <Col md={6} className="profile-section">
                   <h5 className="section-title">Vehicle Information</h5>
                   {isEditing ? (
-                    <>
-                      <Form.Group controlId="formVehicleType">
-                        <Form.Label><FaCar className="icon" /> Vehicle Type</Form.Label>
-                        <Form.Control
-                          type="text"
-                          name="vehicleType"
-                          value={userData.vehicleType}
-                          onChange={handleChange}
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="formNumberPlate">
-                        <Form.Label><FaHashtag className="icon" /> Number Plate</Form.Label>
-                        <Form.Control
-                          type="text"
-                          name="numberPlate"
-                          value={userData.numberPlate}
-                          onChange={handleChange}
-                        />
-                      </Form.Group>
-                    </>
+                    vehicleData.map((vehicle, index) => (
+                      <div key={index}>
+                        <Form.Group controlId={`formVehicleType${index}`}>
+                          <Form.Label>Vehicle {index + 1} Type</Form.Label>
+                          <div className="custom-select-wrapper">
+                            <Form.Control
+                              as="select"
+                              name="typeId"
+                              value={vehicle.typeId}
+                              onChange={(e) => handleVehicleChange(index, e)}
+                              className="custom-select"
+                            >
+                              <option value="0">Car</option>
+                              <option value="1">Motor Bike</option>
+                              <option value="2">Bicycle</option>
+                              <option value="3">Bus</option>
+                            </Form.Control>
+                          </div>
+                        </Form.Group>
+                        <Form.Group controlId={`formNumberPlate${index}`}>
+                          <Form.Label>Number Plate</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="licensePlate"
+                            value={vehicle.licensePlate}
+                            onChange={(e) => handleVehicleChange(index, e)}
+                          />
+                        </Form.Group>
+                        <hr />
+                      </div>
+                    ))
                   ) : (
-                    <>
-                      <Card.Text className="profile-info">
-                        <FaCar className="icon" /> <strong>Vehicle Type:</strong> {userData.vehicleType}
-                      </Card.Text>
-                      <Card.Text className="profile-info">
-                        <FaHashtag className="icon" /> <strong>Number Plate:</strong> {userData.numberPlate}
-                      </Card.Text>
-                      {vehicleImage && (
-                        <img src={vehicleImage} alt="Vehicle" className="vehicle-image-preview" />
-                      )}
-                    </>
+                    vehicleData.map((vehicle, index) => (
+                      <div key={index}>
+                        <Card.Text className="profile-info">
+                          <FaCar className="icon" /> <strong>Vehicle {index + 1} Type:</strong> {vehicle.type}
+                        </Card.Text>
+                        <Card.Text className="profile-info">
+                          <FaHashtag className="icon" /> <strong>Number Plate:</strong> {vehicle.licensePlate}
+                        </Card.Text>
+                        <hr />
+                      </div>
+                    ))
                   )}
                 </Col>
               </Row>
               <Button className="edit-profile-btn mt-4" onClick={handleEditClick}>
                 {isEditing ? "Save Profile" : "Edit Profile"}
               </Button>
+              {!isEditing ? 
+                <Button className="btn-danger edit-profile-btn mt-4" onClick={logout}>
+                  Logout
+                </Button> 
+                : 
+                <Button className="btn-secondary edit-profile-btn mt-4" onClick={handleCancelClick}>
+                  Cancel
+                </Button>
+              }
             </Card.Body>
           </Card>
         </Container>

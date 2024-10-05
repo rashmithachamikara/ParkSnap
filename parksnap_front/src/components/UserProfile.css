@@ -61,18 +61,14 @@
     font-size: 1.2rem;
   }
   
-
-  
-
-  
   /* Edit Profile Button */
   .edit-profile-btn {
-    background: linear-gradient(90deg, #007bff, #0066ff); /* Slight blue effect */
+    background-color: linear-gradient(90deg, #007bff, #0066ff); /* Slight blue effect */
     border: none;
     color: white;
-    margin-top: 20px;
+    margin: 20px 10px;
     font-size: 0.9rem;
-    padding: 10px 30px;
+    padding: 10px 10px;
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
@@ -82,7 +78,7 @@
   }
   
   .edit-profile-btn:hover {
-    background-color: #e91e63 !important; /* Ensure hover effect works with !important */
+    background-color: #A9016D !important; /* Ensure hover effect works with !important */
     color: white;
     transition: 0.3s ease; /* Smooth transition for hover */
   }
@@ -95,4 +91,13 @@
 
 .profile-page .form-label{
   margin-top: 15px;
+}
+
+.profile-page .form-control:disabled {
+  background-color: #1E1029;
+  color: gray;
+}
+
+.profile-page strong{
+  margin-right: 10px;
 }
