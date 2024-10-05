@@ -48,7 +48,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#0a042e', color: 'white', fontFamily: 'Arial, sans-serif' }}>
+    <div className='dashboard' style={{ backgroundColor: '#0a042e', color: 'white', fontFamily: 'Arial, sans-serif' }}>
       <NavigationBar />
       <div style={{paddingTop: '40px', paddingBottom: '70px'}}>
         <h1 style={{ textAlign: 'center', fontSize: '3rem', color: '#e7008a' }}>Dashboard</h1>

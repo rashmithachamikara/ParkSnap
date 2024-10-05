@@ -1,5 +1,4 @@
 .App {
-    font-family: 'Arial', sans-serif;
     text-align: center;
     color: white;
     background-color: #0A0322;
@@ -62,7 +61,6 @@
     grid-gap: 20px; /* Adjust gap between slots */
     margin-bottom: 20px;
 }
-
 .slot {
     background-color: #740182;
     border: none;
@@ -79,7 +77,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     grid-gap: 10px; /* Adjust gap between slots */
-    margin-top: -270px;
+    margin-top: -280px;
     margin-right: -510px;
 }
 .slotssmall .slot {
@@ -90,12 +88,21 @@
     padding: 20px;
     cursor: pointer;
     border-radius: 10px;
-    transition: background-color 0.3s;
+    transition: background-color 0.1s;
     width: 115px;
     height: 115px;
 }
-.slot:hover {
+.slot.reserved{
     background-color: #0A0322;
+    color: rgb(109, 109, 109);
+}
+.slot:hover {
+    background-color: #c50080;
+}
+.slot.reserved:hover{
+    color: rgb(109, 109, 109);
+    background-color: #0A0322;
+    cursor: auto;
 }
 
 

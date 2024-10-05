@@ -1,32 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap'; // Import Button from react-bootstrap
+import axiosInstance from '../axiosInstance'; // Import your axios instance
 import './Pop.css';
 
 const Pop = ({ number, onClose }) => {
   const [vehicleNumber, setVehicleNumber] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
+  const [vehicles, setVehicles] = useState([]);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const response = await axiosInstance.get(`/api/v1/vehicle/getVehiclesByUserId?userId=${user.userId}`);
+        setVehicles(response.data.content);
+      } catch (error) {
+        console.error('Error fetching vehicles:', error);
+      }
+    };
+
+    fetchVehicles();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate the times
-    const start = new Date(startTime);
-    const end = new Date(endTime);
-
-    if (start >= end) {
-      alert('End time must be after start time.');
+  
+    // Get the selected vehicle
+    const selectedVehicle = vehicles.find(vehicle => vehicle.licensePlate === vehicleNumber);
+  
+    if (!selectedVehicle || vehicleNumber === "") {
+      alert('Please select a vehicle.');
       return;
     }
-
-    const duration = (end - start) / (1000 * 60 * 60); // Duration in hours
-    if (duration > 24) {
-      alert('Reservation cannot exceed 24 hours.');
-      return;
+  
+    // Get the user
+    const user = JSON.parse(localStorage.getItem('user'));
+  
+    // Prepare the reservation data
+    const reservationData = {
+      reservationId: 0,
+      slotId: number,
+      userId: user.userId,
+      vehicleId: selectedVehicle.vehicleId,
+      startTime: new Date().toISOString()
+    };
+  
+    try {
+      // Save the reservation
+      const response = await axiosInstance.post('/api/v1/reservation/saveReservation', reservationData);
+  
+      // Process the reservation
+      alert(`Successfully reserved Slot ${number} for vehicle ${selectedVehicle.licensePlate} for today.`);
+      onClose();
+    } catch (error) {
+      console.error('Error saving reservation:', error);
+      alert('Failed to reserve slot. Please try again.');
     }
-
-    // Process the reservation
-    alert(`Successfully reserved Slot ${number} for vehicle ${vehicleNumber} from ${startTime} to ${endTime}`);
-    onClose();
   };
 
   return (
@@ -35,39 +65,37 @@ const Pop = ({ number, onClose }) => {
         <h3>Reserve Slot {number}</h3>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="vehicleNumber">Vehicle Number:</label>
-            <input
-              type="text"
-              id="vehicleNumber"
-              value={vehicleNumber}
-              onChange={(e) => setVehicleNumber(e.target.value)}
-              required
-            />
+            {vehicles.length > 0 ? (
+              <>
+                <label htmlFor="vehicleNumber">Select Vehicle:</label>
+                <select
+                  id="vehicleNumber"
+                  className=' custom-select form-select'
+                  value={vehicleNumber}
+                  onChange={(e) => setVehicleNumber(e.target.value)}
+                  required
+                >
+                  <option value="">Select a vehicle</option>
+                  {vehicles.map((vehicle) => (
+                    <option key={vehicle.vehicleId} value={vehicle.licensePlate}>
+                      {vehicle.licensePlate}
+                    </option>
+                  ))}
+                </select>
+                <div className='button'>
+                  <Button type="submit">Reserve</Button>
+                  <Button variant="secondary" onClick={onClose}>Close</Button>
+                </div>
+              </>
+            ) : (
+              <p>No vehicles added. <br /><Button className='btn-sm' href="/profile">Add vehicles</Button></p>
+            )}
           </div>
-          <div className="form-group">
-            <label htmlFor="startTime">Start Time:</label>
-            <input
-              type="datetime-local"
-              id="startTime"
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="endTime">End Time:</label>
-            <input
-              type="datetime-local"
-              id="endTime"
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
-              required
-            />
-          </div>
-          <div className='button'>
-          <button type="submit">Reserve</button>
-          <button type="button" onClick={onClose}>Close</button>
-          </div>
+          {vehicles.length === 0 &&
+            <div className='button'>
+              <Button variant="secondary" onClick={onClose}>Close</Button>
+            </div>
+          }
         </form>
       </div>
     </div>

@@ -38,7 +38,7 @@ const Slots = () => {
     };
 
     fetchSlotData();
-  }, [lotId]); // Re-fetch data when visibleLot changes
+  }, [lotId,popupSlot]); // Re-fetch data when visibleLot changes
 
   const handleSlotClick = (slotNumber) => {
     setPopupSlot(slotNumber); // Set the slot number to show in the popup
@@ -91,7 +91,6 @@ const Slots = () => {
                 <div className="slots">
                   {Array.from({ length: 9 }, (_, index) => (
                     <Slot
-                      //Slots in lot 1 starts from 1
                       key={index + 1}
                       number={index + 1}
                       onClick={handleSlotClick}
@@ -101,8 +100,7 @@ const Slots = () => {
                 <div className="slotssmall">
                   {Array.from({ length: 8 }, (_, index) => (
                     <Slot
-                      //Slots in lot 2 starts from 21
-                      key={index + 21}
+                      key={index + 10}
                       number={index + 10}
                       onClick={handleSlotClick}
                     />
@@ -118,9 +116,10 @@ const Slots = () => {
               <div className='mainslot'>
                 <div className="slots">
                   {Array.from({ length: 9 }, (_, index) => (
+                    //Slots in lot 2 starts from 21
                     <Slot
-                      key={index + 1}
-                      number={index + 1}
+                      key={index + 21}
+                      number={index + 21}
                       onClick={handleSlotClick}
                     />
                   ))}
@@ -128,8 +127,8 @@ const Slots = () => {
                 <div className="slotssmall">
                   {Array.from({ length: 8 }, (_, index) => (
                     <Slot
-                      key={index + 10}
-                      number={index + 10}
+                      key={index + 30}
+                      number={index + 30}
                       onClick={handleSlotClick}
                     />
                   ))}

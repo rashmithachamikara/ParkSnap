@@ -19,7 +19,7 @@ body {
     color: white;
   }
   
-  p {
+  .dashboard p {
     font-size: 1rem;
     color: #e0e0e0;
   }
@@ -34,7 +34,6 @@ body {
   }
   
   .dashboard {
-    padding: 20px;
     background-color: #0a042e;
     color: white;
   }
