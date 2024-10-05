@@ -9,12 +9,12 @@ body {
     padding: 10px 0;
   }
   
-  h1 {
+  .dashboard h1 {
     font-size: 3rem;
     color: #e7008a;
   }
   
-  h2 {
+  .dashboard h2 {
     font-size: 2rem;
     color: white;
   }
