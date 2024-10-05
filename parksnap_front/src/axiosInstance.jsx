@@ -27,3 +27,8 @@ axiosInstance.interceptors.request.use(
 );
 
 export default axiosInstance;
+
+/*
+const user = JSON.parse(localStorage.getItem('user'));
+console.log(user.userId, user.username, user.role);
+*/
