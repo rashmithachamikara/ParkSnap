@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axiosInstance from '../axiosInstance'; // Import your axios instance
 import { Form, Button, Row, Col, ProgressBar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './SignUpForm.css';
@@ -9,9 +10,8 @@ const SignUpForm = () => {
     // State to hold form input values
     const [formData, setFormData] = useState({
         name: '',
-        email: '',
-        phone1: '',
-        phone2: '',
+        username: '',
+        phone: '',
         password: '',
         profilePicture: null,
     });
@@ -24,11 +24,52 @@ const SignUpForm = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('User details submitted with data:', formData);
-        navigate('/vehicle-details', { state: { formData } });
-    };
+        try {
+          const response = await axiosInstance.post('/api/auth/register', {
+            name: formData.name,
+            phoneNo: formData.phone,
+            username: formData.username,
+            password: formData.password,
+            userType: {
+              typeId: 0
+            }
+          });
+          console.log("User registered:", response.data);
+          setFormData({ name: "", username: "", phone: "", password: "" }); // Clear form
+      
+          // Call the login function after successful registration
+          await handleLogin(formData.username, formData.password);
+        } catch (error) {
+          console.error("Error registering user:", error);
+        }
+      };
+
+    const handleLogin = async (username, password) => {
+        try {
+          const response = await axiosInstance.post('/api/auth/login', { username, password });
+      
+          if (response.status === 200) {
+            const token = response.data;
+            localStorage.setItem('token', token);
+      
+            const userResponse = await axiosInstance.get('/api/auth/me', {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+      
+            if (userResponse.status === 200) {
+              const userData = userResponse.data;
+              localStorage.setItem('user', JSON.stringify(userData));
+              navigate('/vehicle-details', { state: { formData } }); // Navigate to vehicle details
+            }
+          }
+        } catch (err) {
+          console.error("Error logging in:", err);
+        }
+      };
 
     return (
         <div className="signup-container">
@@ -52,7 +93,7 @@ const SignUpForm = () => {
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control 
                                     type="text" 
-                                    placeholder="Enter name" 
+                                    placeholder="Your name" 
                                     name="name" 
                                     value={formData.name} 
                                     onChange={handleChange} 
@@ -62,12 +103,12 @@ const SignUpForm = () => {
                         </Col>
                         <Col>
                             <Form.Group controlId="formEmail">
-                                <Form.Label>Email</Form.Label>
+                                <Form.Label>Username</Form.Label>
                                 <Form.Control 
-                                    type="email" 
-                                    placeholder="Enter email" 
-                                    name="email" 
-                                    value={formData.email} 
+                                    type="text" 
+                                    placeholder="(Can be your email)" 
+                                    name="username" 
+                                    value={formData.username} 
                                     onChange={handleChange} 
                                     required
                                 />
@@ -78,10 +119,10 @@ const SignUpForm = () => {
                     <Row>
                         <Col>
                             <Form.Group controlId="formPhone1">
-                                <Form.Label>Phone Number 1</Form.Label>
+                                <Form.Label>Phone Number</Form.Label>
                                 <Form.Control 
                                     type="text" 
-                                    placeholder="Enter phone number 1" 
+                                    placeholder="Contact number" 
                                     name="phone1" 
                                     value={formData.phone1} 
                                     onChange={handleChange} 
