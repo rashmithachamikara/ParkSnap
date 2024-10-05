@@ -1,6 +1,8 @@
 package com.example.parking.service;
 
+import com.example.parking.dto.LotDTO;
 import com.example.parking.dto.VehicleDTO;
+import com.example.parking.entity.Lot;
 import com.example.parking.entity.User;
 import com.example.parking.entity.Vehicle;
 import com.example.parking.repo.UserRepo;
@@ -32,6 +34,15 @@ public class VehicleService {
             return modelMapper.map(vehicleList, new TypeToken<List<VehicleDTO>>() {}.getType());
         } else {
             return null;
+        }
+    }
+
+    public String saveVehicle(VehicleDTO vehicleDTO) {
+        if (vehicleRepo.existsById(vehicleDTO.getVehicleId())) {
+            return VarList.RSP_DUPLICATED;
+        } else {
+            vehicleRepo.save(modelMapper.map(vehicleDTO, Vehicle.class));
+            return VarList.RSP_SUCCESS;
         }
     }
 

@@ -53,6 +53,37 @@ public class VehicleController {
         }
     }
 
+    @PostMapping(value = "/saveVehicle")
+    public ResponseEntity saveVehicle(@RequestBody VehicleDTO vehicleDTO) {
+        try{
+            String res = vehicleService.saveVehicle(vehicleDTO);
+            if (res.equals("00")){
+                //Success
+                responseDTO.setCode(VarList.RSP_SUCCESS);
+                responseDTO.setMessage("Success");
+                responseDTO.setContent(vehicleDTO);
+                return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
+            } else if (res.equals("01")){
+                //Duplicate
+                responseDTO.setCode(VarList.RSP_DUPLICATED);
+                responseDTO.setMessage("Vehicle ID already in Use!");
+                responseDTO.setContent(vehicleDTO);
+                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
+            } else {
+                //If something else
+                responseDTO.setCode(VarList.RSP_FAIL);
+                responseDTO.setMessage("Unknown Error!");
+                responseDTO.setContent(vehicleDTO);
+                return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } catch (Exception e) {
+            responseDTO.setCode(VarList.RSP_ERROR);
+            responseDTO.setMessage("Unknown Server Error!");
+            responseDTO.setContent(vehicleDTO);
+            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping(value = "/updateVehicle")
     public ResponseEntity updateVehicle(@RequestBody VehicleDTO vehicleDTO) {
         try{
@@ -83,4 +114,5 @@ public class VehicleController {
             return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }
