@@ -4,12 +4,16 @@ import com.example.parking.dto.ReservationDTO;
 import com.example.parking.dto.ResponseDTO;
 import com.example.parking.repo.ReservationRepo;
 import com.example.parking.service.ReservationService;
+import com.example.parking.service.UserService;
 import com.example.parking.util.VarList;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +25,8 @@ import java.util.Map;
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private ResponseDTO responseDTO;
     @Autowired
@@ -113,14 +119,49 @@ public class ReservationController {
     }
 
     // getSlotDataById. Admin only
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getSlotDataById/{slotId}")
     public ResponseEntity<List<Map<String, Object>>> getSlotDataById(@PathVariable("slotId") int slotId) {
         try {
+            // Fetch logged-in user's username (assuming username is the user's identifier)
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String loggedInUsername = ((UserDetails) authentication.getPrincipal()).getUsername();
+
+            // Fetch reservation details
             List<Map<String, Object>> reservationDetails = reservationService.getReservationDetailsBySlotId(slotId);
+
+            // Check if the logged-in user is an admin or the reservation belongs to the user
+            boolean isAuthorized = reservationDetails.stream().anyMatch(reservation -> {
+                Integer userId = (Integer) reservation.get("user_id"); // Assuming "user_id" is part of the reservation details
+                return isUserAdmin(authentication) || isReservationOwner(loggedInUsername, userId);
+            });
+
+            // Return forbidden if the user is neither admin nor the owner
+            if (!isAuthorized) {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+
             return new ResponseEntity<>(reservationDetails, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    // Helper method to check if the logged-in user is an admin
+    private boolean isUserAdmin(Authentication authentication) {
+        return authentication.getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"));
+    }
+
+    // Helper method to check if the logged-in user owns the reservation
+    private boolean isReservationOwner(String loggedInUsername, Integer reservationUserId) {
+        // Assuming you have a method to fetch the logged-in user's ID by their username
+        Integer loggedInUserId = getUserIdByUsername(loggedInUsername);
+        return loggedInUserId.equals(reservationUserId);
+    }
+
+    // Mock method: Replace this with your actual user service to get the userId from the username
+    private Integer getUserIdByUsername(String username) {
+        // You would typically fetch the userId from your UserService or database
+        return userService.findUserIdByUsername(username);
     }
 }

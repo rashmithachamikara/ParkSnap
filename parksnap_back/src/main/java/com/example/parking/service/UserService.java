@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class UserService {
@@ -43,5 +45,10 @@ public class UserService {
             }
         }
         return VarList.RSP_NO_DATA_FOUND;
+    }
+
+    public Integer findUserIdByUsername(String username) {
+        Optional<User> user = userRepo.findByUsername(username);
+        return user.map(User::getUserId).orElse(null);
     }
 }
