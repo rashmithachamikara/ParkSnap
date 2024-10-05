@@ -6,8 +6,8 @@ INSERT IGNORE INTO user_type (type_id, type_name) VALUES (1, 'ADMIN');
 
 -- Vehicle types
 INSERT IGNORE INTO vehicle_type (type_id, type_name) VALUES (0, 'Car');
-INSERT IGNORE INTO vehicle_type (type_id, type_name) VALUES (1, 'Bike');
-INSERT IGNORE INTO vehicle_type (type_id, type_name) VALUES (2, 'Foot Cycle');
+INSERT IGNORE INTO vehicle_type (type_id, type_name) VALUES (1, 'Motor Bike');
+INSERT IGNORE INTO vehicle_type (type_id, type_name) VALUES (2, 'Bicycle');
 INSERT IGNORE INTO vehicle_type (type_id, type_name) VALUES (3, 'Bus');
 
 -- Slot types
@@ -57,6 +57,6 @@ INSERT IGNORE INTO slot (slot_id, type_id, lot_id) VALUES (36, 2, 2);
 INSERT IGNORE INTO slot (slot_id, type_id, lot_id) VALUES (37, 2, 2);
 
 -- Test users
-INSERT IGNORE INTO user (user_id, name, password, phone_no, username, type_id) VALUES (200, "Adam", "$2a$10$/RsgxnXkZOyb4cEmizldCeJ.D3roGcYJJm5QWj1RPYcAFfpCRCRSm", "0716945673","adam",1);
-INSERT IGNORE INTO vehicle (vehicle_id, license_plate, user_id, type_id) VALUES (200, "ABC-6274", 200, 0);
-INSERT IGNORE INTO vehicle (vehicle_id, license_plate, user_id, type_id) VALUES (201, "AZ-6274", 200, 1);
+INSERT IGNORE INTO user (user_id, name, password, phone_no, username, type_id) VALUES (1, "Adam", "$2a$10$/RsgxnXkZOyb4cEmizldCeJ.D3roGcYJJm5QWj1RPYcAFfpCRCRSm", "0716945673","adam",1);
+INSERT IGNORE INTO vehicle (vehicle_id, license_plate, user_id, type_id) VALUES (1, "ABC-6274", 1, 0);
+INSERT IGNORE INTO vehicle (vehicle_id, license_plate, user_id, type_id) VALUES (2, "AZ-6274", 1, 1);
