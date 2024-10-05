@@ -26,6 +26,7 @@ const SignUpForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
           const response = await axiosInstance.post('/api/auth/register', {
             name: formData.name,

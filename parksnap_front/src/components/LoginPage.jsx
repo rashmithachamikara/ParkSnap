@@ -18,6 +18,7 @@ function LoginPage() {
 
     try {
       // Step 1: Make login request
+      console.log(loginData);
       const response = await axiosInstance.post('/api/auth/login', loginData);
 
       if (response.status === 200) {
