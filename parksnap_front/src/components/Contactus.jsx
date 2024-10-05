@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axiosInstance from '../axiosInstance'; // Import your axios instance
 import { Container } from 'react-bootstrap';
 import NavigationBar from './Navbar'; // Adjust the path if needed
 import Footer from './Footer'; // Adjust the path if needed
@@ -12,6 +13,8 @@ const Contactus = () => {
     message: "",
   });
 
+  const [successMessage, setSuccessMessage] = useState("");
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,10 +22,23 @@ const Contactus = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission (e.g., send data to server)
-    console.log("Form submitted:", formData);
+    try {
+      const response = await axiosInstance.post('/api/v1/contactForm/saveContactForm', {
+        userCode: 0,
+        userName: formData.name,
+        userEmail: formData.email,
+        userPhone: formData.phone,
+        userMessage: formData.message,
+      });
+      console.log("Form submitted:", response.data);
+      setFormData({ name: "", email: "", phone: "", message: "" }); // Clear form
+      setSuccessMessage("Form submitted successfully!"); // Set success message
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -74,6 +90,7 @@ const Contactus = () => {
           />
           <button type="submit">Submit</button>
         </form>
+        {successMessage && <p>{successMessage}</p>} {/* Display success message if it exists */}
       </div>
       </Container>
     </div>
