@@ -5,12 +5,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ReservationRepo extends JpaRepository<Reservation, Integer> {
 
     @Query("SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END FROM Reservation r WHERE r.slot.id = :slotId")
     boolean existsBySlotId(@Param("slotId") Integer slotId);
+
+    @Query("SELECT CASE WHEN COUNT(r) > 0 THEN TRUE ELSE FALSE END " +
+            "FROM Reservation r WHERE r.slot.id = :slotId AND r.startTime BETWEEN :startOfDay AND :endOfDay")
+    boolean existsBySlotIdAndStartTimeBetween(@Param("slotId") Integer slotId,
+                                              @Param("startOfDay") LocalDateTime startOfDay,
+                                              @Param("endOfDay") LocalDateTime endOfDay);
+
 
     @Query("SELECT COUNT(r) FROM Reservation r WHERE r.slot.lot.id = :lotId")
     long countOccupiedSlotsByLotId(@Param("lotId") Integer lotId);
