@@ -52,52 +52,67 @@ function UserProfile() {
 
   const handleEditClick = async () => {
     if (isEditing) {
-      // Update user details
+      // Update user details (same as before)
       try {
         const response = await axiosInstance.put('/api/v1/user/updateUser', {
           userId: user.userId,
           name: userData.name,
           phoneNo: userData.phoneNo
         });
-
+  
         if (response.data.code !== '00') {
           console.error('Failed to update user details');
         }
       } catch (error) {
         console.error('An error occurred while updating user details:', error);
       }
-
-      // Update vehicle details
+  
+      // Update or save vehicle details
       for (let i = 0; i < vehicleData.length; i++) {
         const vehicle = vehicleData[i];
-
+  
         console.log('Vehicle:', vehicle);
-
-        // If license plate is empty, skip this vehicle
-        if (!vehicle.licensePlate) {
-          continue;
-        }
-
-        try {
-          const response = await axiosInstance.put('/api/v1/vehicle/updateVehicle', {
-            vehicleId: vehicle.vehicleId,//string to int
-            typeId: parseInt(vehicle.typeId),
-            userId: user.userId,
-            licensePlate: vehicle.licensePlate
-          });
-
-          if (response.data.code !== '00') {
-            console.error(`Failed to update vehicle ${i + 1} details`);
+  
+        if (!vehicle.vehicleId && vehicle.licensePlate) {
+          // If the vehicleId doesn't exist but the user filled the license plate, save a new vehicle via POST
+          try {
+            const response = await axiosInstance.post('/api/v1/vehicle/saveVehicle', {
+              typeId: parseInt(vehicle.typeId),
+              userId: user.userId,
+              licensePlate: vehicle.licensePlate
+            });
+  
+            if (response.data.code !== '00') {
+              console.error(`Failed to save vehicle ${i + 1} details`);
+            }
+          } catch (error) {
+            console.error(`An error occurred while saving vehicle ${i + 1} details:`, error);
           }
-        } catch (error) {
-          console.error(`An error occurred while updating vehicle ${i + 1} details:`, error);
+        } else if (vehicle.vehicleId) {
+          // If vehicleId exists, update the vehicle via PUT
+          try {
+            const response = await axiosInstance.put('/api/v1/vehicle/updateVehicle', {
+              vehicleId: vehicle.vehicleId,
+              typeId: parseInt(vehicle.typeId),
+              userId: user.userId,
+              licensePlate: vehicle.licensePlate
+            });
+  
+            if (response.data.code !== '00') {
+              console.error(`Failed to update vehicle ${i + 1} details`);
+            }
+          } catch (error) {
+            console.error(`An error occurred while updating vehicle ${i + 1} details:`, error);
+          }
         }
-        window.location.reload(); // Reload the page to see the updated data
       }
+  
+      window.location.reload(); // Reload the page to see the updated data
     }
-
+  
     setIsEditing(!isEditing);
   };
+  
 
   const handleCancelClick = () => {
     window.location.reload(); // Reload the page to cancel editing
@@ -123,13 +138,18 @@ function UserProfile() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     navigate('/'); // Redirect to home page
+  };
+
+  // Ensure at least two vehicle slots are displayed
+  const vehiclesToDisplay = [...vehicleData];
+  while (vehiclesToDisplay.length < 2) {
+    vehiclesToDisplay.push({ typeId: '', licensePlate: '' }); // Add empty vehicle slot
   }
 
   return (
     <>
       <NavigationBar />
       <div className="profile-page">
-
         <Container className="profile-container mt-5">
           <Card className="profile-card shadow-sm">
             <Card.Header className="profile-header">
@@ -190,7 +210,7 @@ function UserProfile() {
                 <Col md={6} className="profile-section">
                   <h5 className="section-title">Vehicle Information</h5>
                   {isEditing ? (
-                    vehicleData.map((vehicle, index) => (
+                    vehiclesToDisplay.map((vehicle, index) => (
                       <div key={index}>
                         <Form.Group controlId={`formVehicleType${index}`}>
                           <Form.Label>Vehicle {index + 1} Type</Form.Label>
@@ -222,13 +242,13 @@ function UserProfile() {
                       </div>
                     ))
                   ) : (
-                    vehicleData.map((vehicle, index) => (
+                    vehiclesToDisplay.map((vehicle, index) => (
                       <div key={index}>
                         <Card.Text className="profile-info">
-                          <FaCar className="icon" /> <strong>Vehicle {index + 1} Type:</strong> {vehicle.type}
+                          <FaCar className="icon" /> <strong>Vehicle {index + 1} Type:</strong> {vehicle.type || 'N/A'}
                         </Card.Text>
                         <Card.Text className="profile-info">
-                          <FaHashtag className="icon" /> <strong>Number Plate:</strong> {vehicle.licensePlate}
+                          <FaHashtag className="icon" /> <strong>Number Plate:</strong> {vehicle.licensePlate || 'N/A'}
                         </Card.Text>
                         <hr />
                       </div>

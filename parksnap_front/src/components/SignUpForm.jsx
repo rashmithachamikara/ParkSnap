@@ -11,9 +11,8 @@ const SignUpForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         username: '',
-        phone: '',
+        phoneNo: '',
         password: '',
-        profilePicture: null,
     });
 
     const handleChange = (e) => {
@@ -30,7 +29,7 @@ const SignUpForm = () => {
         try {
           const response = await axiosInstance.post('/api/auth/register', {
             name: formData.name,
-            phoneNo: formData.phone,
+            phoneNo: formData.phoneNo,
             username: formData.username,
             password: formData.password,
             userType: {
@@ -38,7 +37,7 @@ const SignUpForm = () => {
             }
           });
           console.log("User registered:", response.data);
-          setFormData({ name: "", username: "", phone: "", password: "" }); // Clear form
+          setFormData({ name: "", username: "", phoneNo: "", password: "" }); // Clear form
       
           // Call the login function after successful registration
           await handleLogin(formData.username, formData.password);
@@ -124,8 +123,8 @@ const SignUpForm = () => {
                                 <Form.Control 
                                     type="text" 
                                     placeholder="Contact number" 
-                                    name="phone1" 
-                                    value={formData.phone1} 
+                                    name="phoneNo" 
+                                    value={formData.phoneNo} 
                                     onChange={handleChange} 
                                     required
                                 />
