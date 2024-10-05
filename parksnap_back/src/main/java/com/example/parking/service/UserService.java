@@ -29,10 +29,19 @@ public class UserService {
 
     public String updateUser(UserDTO userDTO) {
         if (userRepo.existsById(userDTO.getUserId())) {
-            userRepo.save(modelMapper.map(userDTO,User.class));
-            return VarList.RSP_SUCCESS;
-        } else {
-            return VarList.RSP_NO_DATA_FOUND;
+            User existingUser = userRepo.findById(userDTO.getUserId()).orElse(null);
+
+            if (existingUser != null) {
+                // Only update fields that you want to allow to be changed.
+                existingUser.setName(userDTO.getName());
+                existingUser.setPhoneNo(userDTO.getPhoneNo());
+
+                // The username is not updated here, so it remains unchanged.
+                userRepo.save(existingUser);
+
+                return VarList.RSP_SUCCESS;
+            }
         }
+        return VarList.RSP_NO_DATA_FOUND;
     }
 }
