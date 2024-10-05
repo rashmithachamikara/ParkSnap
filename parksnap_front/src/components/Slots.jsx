@@ -12,9 +12,9 @@ const Slots = () => {
   const [totalSlots, setTotalSlots] = useState(0);
   const [visibleLot, setVisibleLot] = useState('Lot1');
   const [popupSlot, setPopupSlot] = useState(null); // State to manage the popup
+  const [slotStatus, setSlotStatus] = useState([]); // State to store the status of each slot
 
   const lotId = visibleLot === 'Lot1' ? 1 : 2; // Map visibleLot to lotId
-  //const remainingSlots = totalSlots - occupiedSlots;
 
   // Fetch data for the selected lot
   useEffect(() => {
@@ -22,7 +22,6 @@ const Slots = () => {
       try {
         // Fetch total slot count
         const totalResponse = await axiosInstance.get(`/api/v1/slots/lot/${lotId}/totalCount`);
-        console.log(totalResponse);
         setTotalSlots(totalResponse.data);
 
         // Fetch remaining slots
@@ -32,13 +31,17 @@ const Slots = () => {
         // Fetch occupied slot count
         const occupiedResponse = await axiosInstance.get(`/api/v1/slots/lot/${lotId}/occupiedCount`);
         setOccupiedSlots(occupiedResponse.data);
+
+        // Fetch slot status
+        const statusResponse = await axiosInstance.get(`/api/v1/slots/lot/${lotId}/status`);
+        setSlotStatus(statusResponse.data);
       } catch (error) {
         console.error('Error fetching slot data:', error);
       }
     };
 
     fetchSlotData();
-  }, [lotId,popupSlot]); // Re-fetch data when visibleLot changes
+  }, [lotId, popupSlot]); // Re-fetch data when visibleLot changes
 
   const handleSlotClick = (slotNumber) => {
     setPopupSlot(slotNumber); // Set the slot number to show in the popup
@@ -89,22 +92,32 @@ const Slots = () => {
               <h2>Lot 1</h2>
               <div className='mainslot'>
                 <div className="slots">
-                  {Array.from({ length: 9 }, (_, index) => (
-                    <Slot
-                      key={index + 1}
-                      number={index + 1}
-                      onClick={handleSlotClick}
-                    />
-                  ))}
+                  {Array.from({ length: 9 }, (_, index) => {
+                    const slotNumber = index + 1;
+                    const slot = slotStatus.find(slot => slot.slotId === slotNumber);
+                    return (
+                      <Slot
+                        key={slotNumber}
+                        number={slotNumber}
+                        reserved={slot?.reserved}
+                        onClick={handleSlotClick}
+                      />
+                    );
+                  })}
                 </div>
                 <div className="slotssmall">
-                  {Array.from({ length: 8 }, (_, index) => (
-                    <Slot
-                      key={index + 10}
-                      number={index + 10}
-                      onClick={handleSlotClick}
-                    />
-                  ))}
+                  {Array.from({ length: 8 }, (_, index) => {
+                    const slotNumber = index + 10;
+                    const slot = slotStatus.find(slot => slot.slotId === slotNumber);
+                    return (
+                      <Slot
+                        key={slotNumber}
+                        number={slotNumber}
+                        reserved={slot?.reserved}
+                        onClick={handleSlotClick}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -115,23 +128,32 @@ const Slots = () => {
               <h2>Lot 2</h2>
               <div className='mainslot'>
                 <div className="slots">
-                  {Array.from({ length: 9 }, (_, index) => (
-                    //Slots in lot 2 starts from 21
-                    <Slot
-                      key={index + 21}
-                      number={index + 21}
-                      onClick={handleSlotClick}
-                    />
-                  ))}
+                  {Array.from({ length: 9 }, (_, index) => {
+                    const slotNumber = index + 21;
+                    const slot = slotStatus.find(slot => slot.slotId === slotNumber);
+                    return (
+                      <Slot
+                        key={slotNumber}
+                        number={slotNumber}
+                        reserved={slot?.reserved}
+                        onClick={handleSlotClick}
+                      />
+                    );
+                  })}
                 </div>
                 <div className="slotssmall">
-                  {Array.from({ length: 8 }, (_, index) => (
-                    <Slot
-                      key={index + 30}
-                      number={index + 30}
-                      onClick={handleSlotClick}
-                    />
-                  ))}
+                  {Array.from({ length: 8 }, (_, index) => {
+                    const slotNumber = index + 30;
+                    const slot = slotStatus.find(slot => slot.slotId === slotNumber);
+                    return (
+                      <Slot
+                        key={slotNumber}
+                        number={slotNumber}
+                        reserved={slot?.reserved}
+                        onClick={handleSlotClick}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -151,9 +173,15 @@ const Slots = () => {
 };
 
 // Slot Component
-const Slot = ({ number, onClick }) => {
+const Slot = ({ number, reserved, onClick }) => {
+  const handleClick = () => {
+    if (!reserved) {
+      onClick(number);
+    }
+  };
+
   return (
-    <button className="slot" onClick={() => onClick(number)}>
+    <button className={`slot ${reserved ? 'reserved' : ''}`} onClick={handleClick}>
       {number}
     </button>
   );
