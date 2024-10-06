@@ -7,7 +7,7 @@ import "./Dashboard.css";
 import NavigationBar from './Navbar';
 import Footer from './Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import moment from 'moment';
 
 // Register ChartJS components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -15,6 +15,10 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 const Dashboard = () => {
   const [contactRequests, setContactRequests] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [reservationsLastWeek, setReservationsLastWeek] = useState({
+    Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0
+  });
+  const [currentWeekOffset, setCurrentWeekOffset] = useState(0); // Track the week offset
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -22,7 +26,8 @@ const Dashboard = () => {
       setIsAdmin(true);
       fetchContactRequests();
     }
-  }, []);
+    fetchReservationsLastWeek(currentWeekOffset);
+  }, [currentWeekOffset]);
 
   const fetchContactRequests = async () => {
     try {
@@ -40,14 +45,67 @@ const Dashboard = () => {
     }
   };
 
+  const fetchReservationsLastWeek = async (weekOffset) => {
+    try {
+      const weekStart = moment().startOf('isoWeek').add(weekOffset, 'weeks').format('YYYY-MM-DD'); // Get Monday of the selected week
+      const response = await axiosInstance.get(`/api/v1/reservation/countByWeek?weekStart=${weekStart}`);
+      const data = response.data;
+
+      // Update the state with the response data
+      setReservationsLastWeek({
+        Monday: data.Monday || 0,
+        Tuesday: data.Tuesday || 0,
+        Wednesday: data.Wednesday || 0,
+        Thursday: data.Thursday || 0,
+        Friday: data.Friday || 0,
+        Saturday: data.Saturday || 0,
+        Sunday: data.Sunday || 0,
+      });
+    } catch (error) {
+      console.error('Error fetching reservation data:', error);
+    }
+  };
+
+  // Handle week navigation
+  const maxWeeksBefore = 20; // Maximum number of weeks to display before the current week
+
+  const handleNextWeek = () => {
+    if (currentWeekOffset < 0) {
+      setCurrentWeekOffset(currentWeekOffset + 1);
+    }
+  };
+
+  const handlePreviousWeek = () => {
+    if (currentWeekOffset > -maxWeeksBefore) {
+      setCurrentWeekOffset(currentWeekOffset - 1);
+    }
+  };
+
+
+  const getWeekRange = (weekOffset) => {
+    const startOfWeek = moment().startOf('isoWeek').add(weekOffset, 'weeks').format('YYYY-MM-DD');
+    const endOfWeek = moment().endOf('isoWeek').add(weekOffset, 'weeks').format('YYYY-MM-DD');
+    return `${startOfWeek} - ${endOfWeek}`;
+  };
+
+
   // Data for the bar chart (for days of the week)
   const dataLastWeek = {
     labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     datasets: [
       {
-        label: 'Traffic by Device',
-        data: [200, 400, 600, 800, 1000, 1200, 1400],
-        backgroundColor: ['#8884d8', '#82ca9d', '#FF6384', '#36A2EB', '#FFCE56', '#6a4fbf', '#23d876'],
+        label: 'Reservations',
+        data: [
+          reservationsLastWeek.Monday,
+          reservationsLastWeek.Tuesday,
+          reservationsLastWeek.Wednesday,
+          reservationsLastWeek.Thursday,
+          reservationsLastWeek.Friday,
+          reservationsLastWeek.Saturday,
+          reservationsLastWeek.Sunday
+        ],
+        backgroundColor: '#740182',
+        // backgroundColor: ['#8884d8', '#82ca9d', '#FF6384', '#36A2EB', '#FFCE56', '#6a4fbf', '#23d876', '#fc4c9a'],
       },
     ],
   };
@@ -57,7 +115,7 @@ const Dashboard = () => {
     labels: ['8AM', '10AM', '12PM', '2PM', '4PM', '6PM', '8PM', '10PM'],
     datasets: [
       {
-        label: 'Traffic by Device',
+        label: 'Traffic by Day',
         data: [100, 200, 300, 400, 500, 600, 700, 800],
         backgroundColor: ['#8884d8', '#82ca9d', '#FF6384', '#36A2EB', '#FFCE56', '#6a4fbf', '#23d876', '#fc4c9a'],
       },
@@ -69,13 +127,21 @@ const Dashboard = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
-      },
-      title: {
         display: true,
-        text: 'Traffic by Device',
+        position: 'bottom',
       },
     },
+    scales: {
+      y: {
+        ticks: {
+          stepSize: 1, // Ensure each tick is spaced by 1
+          callback: function (value) {
+            // Display only whole numbers
+            return Number.isInteger(value) ? value : null;
+          }
+        }
+      }
+    }
   };
 
   // React Table configuration
@@ -178,18 +244,35 @@ const Dashboard = () => {
 
         {/* Last Week Section */}
         <div style={{ padding: '20px', textAlign: 'center', marginBottom: '50px' }}>
-          <h2>Last Week</h2>
+          <h2>Weekly Report</h2>
           <p>Number of reservations per day</p>
-          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+
+          {/* Display only the current and past week ranges */}
+          <div style={{ marginBottom: '20px', fontSize: '1.2rem' }}>
+            <p>{getWeekRange(currentWeekOffset)} {(currentWeekOffset === 0) ? (<>(This week)</>) : (<>({Math.abs(currentWeekOffset)} weeks before)</>)}</p>
+          </div>
+
+          <div className='chart-box' style={{ maxWidth: '600px', margin: '0 auto' }}>
             <Bar data={dataLastWeek} options={options} />
+          </div>
+
+          {/* Week navigation buttons */}
+          <div style={{ marginTop: '20px' }}>
+            <button className="btn btn-primary" onClick={handlePreviousWeek} disabled={currentWeekOffset === (maxWeeksBefore*-1)} style={{ marginRight: '10px' }}>
+              Previous Week
+            </button>
+            <button className="btn btn-primary" onClick={handleNextWeek} disabled={currentWeekOffset === 0}>
+              Next Week
+            </button>
           </div>
         </div>
 
+
         {/* Yesterday Section */}
-        <div style={{ textAlign: 'center' }}>
+        <div className='hide' style={{ textAlign: 'center' }}>
           <h2>Yesterday</h2>
           <p>Number of reservations per hour</p>
-          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <div className='chart-box' style={{ maxWidth: '600px', margin: '0 auto' }}>
             <Bar data={dataYesterday} options={options} />
           </div>
         </div>

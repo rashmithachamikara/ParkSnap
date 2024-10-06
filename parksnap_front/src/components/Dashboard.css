@@ -43,3 +43,18 @@ body {
     text-align: left;
     font-size: 12px;
   }
+
+  .chart-box{
+    border: #e0e0e0 solid 1px;
+    padding: 20px;
+    padding-top: 30px;
+    border-radius: 10px;
+  }
+
+  .dashboard .btn{
+    font-size: 10px;
+  }
+
+  .dashboard .hide{
+    display: none;
+  }
