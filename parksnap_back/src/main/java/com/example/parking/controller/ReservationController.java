@@ -8,6 +8,7 @@ import com.example.parking.service.UserService;
 import com.example.parking.util.VarList;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -163,5 +166,20 @@ public class ReservationController {
     private Integer getUserIdByUsername(String username) {
         // You would typically fetch the userId from your UserService or database
         return userService.findUserIdByUsername(username);
+    }
+
+    @GetMapping("/countByWeek")
+    public ResponseEntity<Map<String, Long>> getReservationCountByWeek(
+            @RequestParam("weekStart") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate weekStart) {
+        Map<String, Long> reservationCounts = reservationService.getReservationsCountByWeek(weekStart);
+        return ResponseEntity.ok(reservationCounts);
+    }
+
+    @GetMapping("/countBetween")
+    public ResponseEntity<Map<String, Long>> getReservationsCountBetween(
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+        Map<String, Long> reservationCounts = reservationService.getReservationsCountBetween(start, end);
+        return ResponseEntity.ok(reservationCounts);
     }
 }

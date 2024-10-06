@@ -35,4 +35,20 @@ public interface ReservationRepo extends JpaRepository<Reservation, Integer> {
             "WHERE s.slot_id=?1 AND DATE(r.start_time)=CURDATE()",nativeQuery = true)
     List<Object[]> findReservationDetailsBySlotId(@Param("slotId") int slotId);
 
+    @Query(value = "SELECT DAYNAME(start_time) AS day_of_week, COUNT(*) AS reservation_count " +
+            "FROM reservation " +
+            "WHERE start_time BETWEEN :startDate AND :endDate " +
+            "GROUP BY day_of_week " +
+            "ORDER BY FIELD(DAYNAME(start_time), 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')",
+            nativeQuery = true)
+    List<Object[]> findReservationCountByDayOfWeek(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
+    @Query(value = "SELECT DATE(start_time) AS reservation_date, COUNT(*) AS reservation_count " +
+            "FROM reservation " +
+            "WHERE start_time BETWEEN :startDate AND :endDate " +
+            "GROUP BY reservation_date " +
+            "ORDER BY reservation_date ASC",
+            nativeQuery = true)
+    List<Object[]> findReservationCountByDay(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
 }
