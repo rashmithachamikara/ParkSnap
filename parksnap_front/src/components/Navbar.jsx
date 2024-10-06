@@ -21,7 +21,11 @@ function NavigationBar() {
             <Navbar bg="dark" variant="dark" expand="lg" className="custom-navbar">
                 <Container fluid>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Brand className="ms-2" href="/reserve">ParkSnap</Navbar.Brand>
+                    {token ? (
+                        <Navbar.Brand className="ms-2" href="/reserve">ParkSnap</Navbar.Brand>
+                    ) :
+                        <Navbar.Brand className="ms-2" href="/">ParkSnap</Navbar.Brand>
+                    }
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             {!token && (
@@ -29,9 +33,11 @@ function NavigationBar() {
                                     <FaHome /> Home
                                 </Nav.Link>
                             )}
-                            <Nav.Link href="/reserve">
-                                <FaParking /> Reserve a parking slot
-                            </Nav.Link>
+                            {token && (
+                                <Nav.Link href="/reserve">
+                                    <FaParking /> Reserve a parking slot
+                                </Nav.Link>
+                            )}
                             <Nav.Link href="/weather">
                                 <FaCloudSun /> Weather
                             </Nav.Link>
@@ -44,13 +50,15 @@ function NavigationBar() {
                             <Nav.Link href="/about">
                                 <FaUsers /> About us
                             </Nav.Link>
-                            <Nav.Link href="/profile">
-                                <FaUserCircle /> User Profile
-                            </Nav.Link>
                             {token && (
-                                <Nav.Link onClick={logout}>
-                                    <FaSignOutAlt /> Logout
-                                </Nav.Link>
+                                <>
+                                    <Nav.Link href="/profile">
+                                        <FaUserCircle /> User Profile
+                                    </Nav.Link>
+                                    <Nav.Link onClick={logout}>
+                                        <FaSignOutAlt /> Logout
+                                    </Nav.Link>
+                                </>
                             )}
                         </Nav>
                     </Navbar.Collapse>
