@@ -1,0 +1,719 @@
+{
+	"info": {
+		"_postman_id": "b7747b74-2092-4987-87c5-ae4818c494ca",
+		"name": "ParkSnap",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21091601"
+	},
+	"item": [
+		{
+			"name": "getUserById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzI3NDc2MTg2LCJleHAiOjE3Mjc1MTIxODZ9.01er2fpnWDpdr2SSiTdvx9TL0mosX_Ulw7SGCdUiSM4",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/user/getUserById?userId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"getUserById"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getVehiclesByUserId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/vehicle/getVehiclesByUserId?userId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"vehicle",
+						"getVehiclesByUserId"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateUser",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 4,\r\n    \"name\": \"Steve\",\r\n    \"phoneNo\": \"0747567458\",\r\n    \"username\": null,\r\n    \"typeId\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/user/updateUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"updateUser"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Hitler",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateVehicle",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vehicleId\": 2,\r\n    \"typeId\": 0,\r\n    \"userId\": 1,\r\n    \"licensePlate\": \"AZ-6274\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/vehicle/updateVehicle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"vehicle",
+						"updateVehicle"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Hitler",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveVehicle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vehicleId\": 0,\r\n    \"typeId\": 0,\r\n    \"userId\": 1,\r\n    \"licensePlate\": \"867855R\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/vehicle/saveVehicle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"vehicle",
+						"saveVehicle"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Hitler",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Dave\",\r\n  \"phoneNo\": \"0717940675\",\r\n  \"username\": \"dave\",\r\n  \"password\": \"123\",\r\n  \"userType\": {\r\n    \"typeId\": 1 // Use the typeId that corresponds to \"ROLE_ADMIN\" or \"ROLE_USER\"\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"adam\",\r\n  \"password\": \"123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzI3NTMxNDk2LCJleHAiOjE3Mjc1Njc0OTZ9.WtBhOAd_5YQWTqK7DvIRBhpYTy65YT_0zX9pI4ckBus",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"johndoe\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hello",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/hello",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"hello"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzI3NDc2MTg2LCJleHAiOjE3Mjc1MTIxODZ9.01er2fpnWDpdr2SSiTdvx9TL0mosX_Ulw7SGCdUiSM4",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lot/2/totalCount",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzI4MDgyMTM2LCJleHAiOjE3MjgxMTgxMzZ9.x9wr_zPzcJmF7suKl3-15NM7XxKJUsCjs2CHwGEHWx0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzI3NDc2MTg2LCJleHAiOjE3Mjc1MTIxODZ9.01er2fpnWDpdr2SSiTdvx9TL0mosX_Ulw7SGCdUiSM4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/slots/lot/1/totalCount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"slots",
+						"lot",
+						"1",
+						"totalCount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth/me",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/auth/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lot/1/totalCount",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzI3NzYzNjA5LCJleHAiOjE3Mjc3OTk2MDl9.p09Epz266JLtMC1ZQNYYMsRpMC6Bv948HQY0gwx1_As",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/slots/lot/1/totalCount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"slots",
+						"lot",
+						"1",
+						"totalCount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lot/{lotId}/status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzI4MDgzNTY2LCJleHAiOjE3MjgxMTk1NjZ9.aUTW61v60_jr73O9Wh5n1AX0xAy0C_IeSG6x1Iojnoc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/slots/lot/{lotId}/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"slots",
+						"lot",
+						"{lotId}",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSlotDataById/{slotId}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reservationId\": 0,\r\n    \"slotId\": 21,\r\n    \"userId\": 1,\r\n    \"vehicleId\": 1,\r\n    \"date\": \"2024-10-05T23:09:15.228Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/reservation/getSlotDataById/{slotId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"reservation",
+						"getSlotDataById",
+						"{slotId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveReservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reservationId\": 0,\r\n    \"slotId\": 21,\r\n    \"userId\": 1,\r\n    \"vehicleId\": 1,\r\n    \"startTime\": \"2024-09-25T06:51:59.338905\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/reservation/saveReservation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"reservation",
+						"saveReservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveContactForm",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userCode\": 0,\r\n  \"userName\": \"Dave 2\",\r\n  \"userEmail\": \"secondar212312y@abc.com\",\r\n  \"userPhone\": \"0787654524\",\r\n  \"userMessage\": \"This is test message 4 This is test message 4This is test message 4 This is test message 4 This is test message 4\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contactForm/saveContactForm",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contactForm",
+						"saveContactForm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllcontactForms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contactForm/getAllcontactForms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contactForm",
+						"getAllcontactForms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSlotDataById/2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/reservation/getSlotDataById/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"reservation",
+						"getSlotDataById",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteReservation",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/reservation/deleteReservation/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"reservation",
+						"deleteReservation",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countByWeek",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/reservation/countByWeek?weekStart=2024-09-30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"reservation",
+						"countByWeek"
+					],
+					"query": [
+						{
+							"key": "weekStart",
+							"value": "2024-09-30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countBetween",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/reservation/countBetween?start=2024-09-24T06:51:59.338905&end=2024-10-25T06:51:59.338905",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"reservation",
+						"countBetween"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2024-09-24T06:51:59.338905"
+						},
+						{
+							"key": "end",
+							"value": "2024-10-25T06:51:59.338905"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZGFtIiwiaWF0IjoxNzI4MTg2NTE2LCJleHAiOjE3MjgyMjI1MTZ9.sd1HinOzq6lAc3hrAivfb3DQ83J2Ntmu242G8ztQp08",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
