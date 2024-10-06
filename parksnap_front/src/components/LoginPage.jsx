@@ -99,7 +99,7 @@ function LoginPage() {
             </Button>
 
             <div className="forgot-password">
-              <a href="/resetpw">Forgot Password?</a>
+              <a href="/contact">Forgot Password?</a>
             </div>
           </Form>
 
