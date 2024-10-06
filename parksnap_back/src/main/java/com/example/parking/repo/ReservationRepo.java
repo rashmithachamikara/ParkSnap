@@ -21,7 +21,7 @@ public interface ReservationRepo extends JpaRepository<Reservation, Integer> {
                                               @Param("endOfDay") LocalDateTime endOfDay);
 
 
-    @Query("SELECT COUNT(r) FROM Reservation r WHERE r.slot.lot.id = :lotId")
+    @Query("SELECT COUNT(r) FROM Reservation r WHERE r.slot.lot.id = :lotId AND DATE(r.startTime)=CURDATE()")
     long countOccupiedSlotsByLotId(@Param("lotId") Integer lotId);
 
     @Query(value = "SELECT u.user_id,u.name, u.username, u.phone_no, r.start_time, r.reservation_id, v.license_plate " +
