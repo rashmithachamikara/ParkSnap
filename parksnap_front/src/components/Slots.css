@@ -120,6 +120,12 @@
     background-color: #0A0322;
     color: rgb(109, 109, 109);
 }
+.slot.reserved.admin {
+    color: white;
+    background-color: #200a6b;
+    cursor:pointer;
+}
+
 
 .slot:hover {
     background-color: #c50080;
@@ -129,6 +135,12 @@
     color: rgb(109, 109, 109);
     background-color: #0A0322;
     cursor: auto;
+}
+
+.slot.reserved.admin:hover {
+    color: white;
+    background-color: #c50080;
+    cursor:pointer;
 }
 
 

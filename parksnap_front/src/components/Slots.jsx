@@ -181,6 +181,8 @@ const Slots = () => {
 
 const Slot = ({ number, reserved, onClick, onDelete }) => {
   const [slotData, setSlotData] = useState(null);
+  const user = JSON.parse(localStorage.getItem('user')); // Get the user from localStorage
+  const isAdmin = user && user.role === "ROLE_ADMIN"; // Check if the user is an admin
 
   useEffect(() => {
     const fetchSlotData = async () => {
@@ -189,7 +191,7 @@ const Slot = ({ number, reserved, onClick, onDelete }) => {
         setSlotData(response.data[0]);
       } catch (error) {
         if (error.response && error.response.status === 403) {
-          // Do nothing if the slot is reserved by someone else
+          // Do nothing if the slot is reserved by another user
         } else {
           console.error('Error fetching slot data:', error);
         }
@@ -202,7 +204,7 @@ const Slot = ({ number, reserved, onClick, onDelete }) => {
   const handleDelete = async () => {
     try {
       await axiosInstance.delete(`/api/v1/reservation/deleteReservation/${slotData.reservation_id}`);
-      setSlotData(null);
+      setSlotData(null); // Clear the slot data after deletion
       onDelete(number); // Call the delete handler passed from parent
     } catch (error) {
       if (error.response && error.response.status === 403) {
@@ -214,22 +216,28 @@ const Slot = ({ number, reserved, onClick, onDelete }) => {
   };
 
   const handleClick = () => {
-    if (!reserved) {
-      onClick(number);
+    if (!reserved || isAdmin) {
+      onClick(number); // Open the popup if the slot is available or the user is an admin
     }
   };
 
   return (
-    <button className={`slot ${reserved ? 'reserved' : ''}`} onClick={handleClick}>
+    <button className={`slot ${reserved ? 'reserved' : ''} ${isAdmin ? 'admin' : ''}`} onClick={handleClick}>
       <div className='slot-number'>{number}</div>
       {slotData && (
         <>
           <div className='license-plate'>{slotData.license_plate}</div>
-          <button className='delete-button' onClick={handleDelete}>Delete</button>
+          {/* Show delete button only for non-admin users */}
+          {!isAdmin && (
+            <button className='delete-button' onClick={handleDelete}>Delete</button>
+          )}
         </>
       )}
     </button>
   );
 };
+
+
+
 
 export default Slots;
