@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../axiosInstance'; // Import your axios instance
+import axiosInstance from '../axiosInstance';
 import './Slots.css';
 import Weather from './Weather';
-import Pop from './Pop'; // Import the updated Popup component
+import Pop from './Pop';
 import NavigationBar from './Navbar';
 import Footer from './Footer';
 
@@ -11,28 +11,23 @@ const Slots = () => {
   const [occupiedSlots, setOccupiedSlots] = useState(0);
   const [totalSlots, setTotalSlots] = useState(0);
   const [visibleLot, setVisibleLot] = useState('Lot1');
-  const [popupSlot, setPopupSlot] = useState(null); // State to manage the popup
-  const [slotStatus, setSlotStatus] = useState([]); // State to store the status of each slot
+  const [popupSlot, setPopupSlot] = useState(null);
+  const [slotStatus, setSlotStatus] = useState([]);
 
-  const lotId = visibleLot === 'Lot1' ? 1 : 2; // Map visibleLot to lotId
+  const lotId = visibleLot === 'Lot1' ? 1 : 2;
 
-  // Fetch data for the selected lot
   useEffect(() => {
     const fetchSlotData = async () => {
       try {
-        // Fetch total slot count
         const totalResponse = await axiosInstance.get(`/api/v1/slots/lot/${lotId}/totalCount`);
         setTotalSlots(totalResponse.data);
 
-        // Fetch remaining slots
         const remainingResponse = await axiosInstance.get(`/api/v1/slots/lot/${lotId}/remaining`);
         setAvailableSlots(remainingResponse.data);
 
-        // Fetch occupied slot count
         const occupiedResponse = await axiosInstance.get(`/api/v1/slots/lot/${lotId}/occupiedCount`);
         setOccupiedSlots(occupiedResponse.data);
 
-        // Fetch slot status
         const statusResponse = await axiosInstance.get(`/api/v1/slots/lot/${lotId}/status`);
         setSlotStatus(statusResponse.data);
       } catch (error) {
@@ -41,18 +36,26 @@ const Slots = () => {
     };
 
     fetchSlotData();
-  }, [lotId, popupSlot]); // Re-fetch data when visibleLot changes
+  }, [lotId, popupSlot]);
 
   const handleSlotClick = (slotNumber) => {
-    setPopupSlot(slotNumber); // Set the slot number to show in the popup
+    setPopupSlot(slotNumber);
   };
 
   const closePopup = () => {
-    setPopupSlot(null); // Hide the popup
+    setPopupSlot(null);
   };
 
   const showLot = (lot) => {
     setVisibleLot(lot);
+  };
+
+  const handleSlotDelete = (slotNumber) => {
+    setSlotStatus((prevStatus) =>
+      prevStatus.map((slot) =>
+        slot.slotId === slotNumber ? { ...slot, reserved: false } : slot
+      )
+    );
   };
 
   return (
@@ -101,6 +104,7 @@ const Slots = () => {
                         number={slotNumber}
                         reserved={slot?.reserved}
                         onClick={handleSlotClick}
+                        onDelete={handleSlotDelete} // Pass delete handler
                       />
                     );
                   })}
@@ -115,6 +119,7 @@ const Slots = () => {
                         number={slotNumber}
                         reserved={slot?.reserved}
                         onClick={handleSlotClick}
+                        onDelete={handleSlotDelete} // Pass delete handler
                       />
                     );
                   })}
@@ -137,6 +142,7 @@ const Slots = () => {
                         number={slotNumber}
                         reserved={slot?.reserved}
                         onClick={handleSlotClick}
+                        onDelete={handleSlotDelete} // Pass delete handler
                       />
                     );
                   })}
@@ -151,6 +157,7 @@ const Slots = () => {
                         number={slotNumber}
                         reserved={slot?.reserved}
                         onClick={handleSlotClick}
+                        onDelete={handleSlotDelete} // Pass delete handler
                       />
                     );
                   })}
@@ -172,8 +179,40 @@ const Slots = () => {
   );
 };
 
-// Slot Component
-const Slot = ({ number, reserved, onClick }) => {
+const Slot = ({ number, reserved, onClick, onDelete }) => {
+  const [slotData, setSlotData] = useState(null);
+
+  useEffect(() => {
+    const fetchSlotData = async () => {
+      try {
+        const response = await axiosInstance.get(`/api/v1/reservation/getSlotDataById/${number}`);
+        setSlotData(response.data[0]);
+      } catch (error) {
+        if (error.response && error.response.status === 403) {
+          // Do nothing if the slot is reserved by someone else
+        } else {
+          console.error('Error fetching slot data:', error);
+        }
+      }
+    };
+
+    fetchSlotData();
+  }, [number, reserved]);
+
+  const handleDelete = async () => {
+    try {
+      await axiosInstance.delete(`/api/v1/reservation/deleteReservation/${slotData.reservation_id}`);
+      setSlotData(null);
+      onDelete(number); // Call the delete handler passed from parent
+    } catch (error) {
+      if (error.response && error.response.status === 403) {
+        alert('You are not allowed to delete this reservation.');
+      } else {
+        console.error('Error deleting reservation:', error);
+      }
+    }
+  };
+
   const handleClick = () => {
     if (!reserved) {
       onClick(number);
@@ -182,7 +221,13 @@ const Slot = ({ number, reserved, onClick }) => {
 
   return (
     <button className={`slot ${reserved ? 'reserved' : ''}`} onClick={handleClick}>
-      {number}
+      <div className='slot-number'>{number}</div>
+      {slotData && (
+        <>
+          <div className='license-plate'>{slotData.license_plate}</div>
+          <button className='delete-button' onClick={handleDelete}>Delete</button>
+        </>
+      )}
     </button>
   );
 };
