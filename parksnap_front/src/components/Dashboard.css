@@ -17,6 +17,7 @@ body {
   .dashboard h2 {
     font-size: 2rem;
     color: white;
+    margin-bottom: 10px;
   }
   
   .dashboard p {
@@ -38,3 +39,7 @@ body {
     color: white;
   }
   
+  .dashboard td{
+    text-align: left;
+    font-size: 12px;
+  }
