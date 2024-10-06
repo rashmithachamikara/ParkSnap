@@ -19,6 +19,7 @@ function LoginPage() {
     try {
       // Step 1: Make login request
       console.log(loginData);
+      localStorage.removeItem('token');//Ensure token is cleared before login
       const response = await axiosInstance.post('/api/auth/login', loginData);
 
       if (response.status === 200) {
