@@ -11,7 +11,6 @@ https://github.com/rashmithachamikara/ParkSnap
 Use git or download zip
 
 ## 2.  Open the parksnap_back folder with your Java IDE (eg: IntelliJ IDEA)
-change following
 
 ## 3.  Run (Start) MySQL database.
 
@@ -25,6 +24,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/parkSnap?createDatabaseIfNotEx
 change localhost:3306 only if your database port is different (usually no need)
 
 spring.datasource.username= Your mySQL username
+
 spring.datasource.password= Your mySQL password
 
 ## 5.  Run the backend
